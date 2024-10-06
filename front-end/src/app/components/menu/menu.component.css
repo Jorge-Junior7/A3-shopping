@@ -1,0 +1,134 @@
+/* Estilizando o menu horizontal */
+.sidebar {
+  width: 100%;
+  height: 60px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.logo img {
+  height: 85px;  /* Ajuste a altura do logo */
+  margin-right: 30px;
+  margin-top: 10px;
+}
+
+/* Estilizando o campo de busca */
+.search-container {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.search-container input[type="text"] {
+  padding: 8px 12px;
+  font-size: 17px;
+  border: none;
+  height: 40px;
+  background-color: #333;
+  color: white;
+  border-radius: 5px 0 0 5px;
+  box-sizing: border-box;
+}
+
+.search-btn {
+  height: 40px;
+  padding: 0 12px;
+  background-color: #333;
+  border: none;
+  cursor: pointer;
+  border-radius: 0 5px 5px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-btn i {
+  color: #818181;
+}
+
+.search-btn:hover i {
+  color: #f1f1f1;
+}
+
+/* Estilos dos links e botão de filtro no menu */
+.sidebar a, .filter-button {
+  padding: 14px 20px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  text-align: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.filter-button:hover,
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+/* Estilos da bolinha de perfil */
+.perfil {
+  margin-left: auto;
+}
+
+/* Ajustar o conteúdo principal */
+.main {
+  margin-top: 60px;
+  padding: 10px;
+}
+
+/* Estilizando o container de filtros */
+.filter-container {
+  margin-top: 70px;
+  padding: 15px;
+  background-color: #333;
+  color: white;
+  border-radius: 5px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.filter-container label {
+  display: flex;
+  align-items: center;
+}
+
+.filter-container button {
+  padding: 8px;
+  background-color: #111;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.filter-container button:hover {
+  background-color: #444;
+}
+
+/* Responsividade para telas menores */
+@media screen and (max-width: 600px) {
+  .sidebar a {
+    font-size: 18px;
+    padding: 12px 10px;
+  }
+
+  .search-container input[type="text"] {
+    width: 150px;
+  }
+
+  .logo img {
+    height: 30px;
+  }
+}
+
