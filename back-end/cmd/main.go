@@ -1,13 +1,20 @@
 package main
 
 import (
-    "github.com/Jorge-Junior7/A3shopping/back-end/db" // Corrigido para refletir o novo nome do módulo
-    "log"
+	"log"
+	"net/http"
+
+	"github.com/Jorge-Junior7/A3shopping/back-end/db"
+	"github.com/Jorge-Junior7/A3shopping/back-end/routes"
 )
 
 func main() {
-    err := db.Connect()
-    if err != nil {
-        log.Fatalf("Could not connect to the database: %v", err)
-    }
+	// Conectar ao banco de dados
+	db.Connect()
+
+	// Definir as rotas
+	router := routes.SetupRoutes()
+
+	// Iniciar o servidor
+	log.Fatal(http.ListenAndServe(":8080", router))
 }
