@@ -2,10 +2,11 @@ package db
 
 import (
     "database/sql"
-    _ "github.com/lib/pq"
     "log"
     "os"
-    "github.com/joho/godotenv"
+
+    _ "github.com/lib/pq"         // Importa o driver PostgreSQL
+    "github.com/joho/godotenv"    // Importa a biblioteca para ler o arquivo .env
 )
 
 var DB *sql.DB
@@ -23,12 +24,17 @@ func Connect() {
     log.Println("DB_USER:", os.Getenv("DB_USER"))
     log.Println("DB_PASSWORD:", os.Getenv("DB_PASSWORD"))
     log.Println("DB_NAME:", os.Getenv("DB_NAME"))
-    log.Println("DB_CONN_STR:", os.Getenv("DB_CONN_STR"))
-
-    // Pega a string de conexão do .env
+    
+    // A string de conexão é geralmente construída com as variáveis
     connStr := os.Getenv("DB_CONN_STR")
     if connStr == "" {
-        log.Fatal("String de conexão não encontrada. Verifique o arquivo .env.")
+        // Se a string de conexão não estiver definida no .env, você pode construí-la a partir das variáveis
+        connStr = "user=" + os.Getenv("DB_USER") +
+            " password=" + os.Getenv("DB_PASSWORD") +
+            " dbname=" + os.Getenv("DB_NAME") +
+            " host=" + os.Getenv("DB_HOST") +
+            " port=" + os.Getenv("DB_PORT") +
+            " sslmode=disable"
     }
 
     DB, err = sql.Open("postgres", connStr)
@@ -36,6 +42,7 @@ func Connect() {
         log.Fatal("Erro ao conectar ao banco de dados: ", err)
     }
 
+    // Verifica se a conexão é válida
     if err = DB.Ping(); err != nil {
         log.Fatal("Banco de dados não está acessível: ", err)
     }

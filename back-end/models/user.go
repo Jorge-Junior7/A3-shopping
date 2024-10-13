@@ -1,13 +1,13 @@
 package models
 
 type User struct {
-    ID            int     `db:"id"`
-    Email         string  `db:"email"`
-    Password      string  `db:"password"`
-    FullName      string  `db:"full_name"`      // Nome completo
-    BirthDate     string  `db:"birth_date"`     // Data de nascimento
-    CPF           string  `db:"cpf"`            // CPF
-    Nickname      string  `db:"nickname"`       // Apelido
-    Location      string  `db:"location"`       // Localização
-    Photo         string  `db:"photo"`          // Foto
+	ID           int    `json:"id"`
+	FullName     string `json:"full_name"`
+	BirthDate    string `json:"birthdate"`
+	CPF          string `json:"cpf"`
+	Nickname     string `json:"nickname"`
+	ProfilePhoto string `json:"photo"`
+	Location     string `json:"location"`
+	Email        string `json:"email"`
+	Password     string `json:"password"`
 }
