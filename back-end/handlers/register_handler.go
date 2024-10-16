@@ -1,8 +1,10 @@
 package handlers
 
 import (
+    "log"
     "net/http"
     "regexp"
+    "strings"
 
     "github.com/Jorge-Junior7/A3shopping/back-end/db"
     "github.com/Jorge-Junior7/A3shopping/back-end/models"
@@ -33,9 +35,7 @@ func Register(c *gin.Context) {
     if user.Nickname == "" {
         errors["nickname"] = "O apelido é obrigatório"
     }
-    if user.ProfilePhoto == "" {
-        errors["photo"] = "A foto é obrigatória"
-    }
+
     if user.Location == "" {
         errors["location"] = "A localização é obrigatória"
     }
@@ -50,7 +50,7 @@ func Register(c *gin.Context) {
         errors["password"] = "A senha deve ter pelo menos 8 caracteres"
     }
 
-    // Se houver erros, retorne-os
+    // Se houver erros de validação, retorná-los
     if len(errors) > 0 {
         c.JSON(http.StatusBadRequest, gin.H{"errors": errors})
         return
@@ -67,10 +67,22 @@ func Register(c *gin.Context) {
 
     // Insere o usuário no banco de dados
     if err := services.RegisterUser(user); err != nil {
+        if strings.Contains(err.Error(), "duplicate key value violates unique constraint") {
+            if strings.Contains(err.Error(), "users_email_key") {
+                errors["email"] = "Este email já está cadastrado"
+            }
+            if strings.Contains(err.Error(), "users_cpf_key") {
+                errors["cpf"] = "Este CPF já está cadastrado"
+            }
+            c.JSON(http.StatusConflict, gin.H{"errors": errors})
+            return
+        }
+        log.Printf("Erro ao registrar usuário: %v", err) // Loga o erro detalhado
         c.JSON(http.StatusInternalServerError, gin.H{"error": "Erro ao registrar usuário"})
         return
     }
 
+    // Resposta de sucesso
     c.JSON(http.StatusOK, gin.H{"message": "Usuário registrado com sucesso!"})
 }
 

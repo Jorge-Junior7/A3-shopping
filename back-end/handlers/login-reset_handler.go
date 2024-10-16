@@ -8,8 +8,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// Função para redefinir a senha
-func ResetPassword(c *gin.Context) {
+// Nome da função alterado para LoginReset para ser consistente com as rotas
+func LoginReset(c *gin.Context) {
 	var user models.User
 	if err := c.ShouldBindJSON(&user); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Dados inválidos"})

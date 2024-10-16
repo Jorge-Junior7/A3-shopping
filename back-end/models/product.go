@@ -1,10 +1,12 @@
 package models
 
 type Product struct {
-    ID          int     `db:"id"`
-    Name        string  `db:"name"`
-    Description string  `db:"description"` // Descrição do produto
-    Price       float64 `db:"price"`
-    Photos      string  `db:"photos"` // URLs ou caminhos das fotos
-    CreatedAt   string  `db:"created_at"` // Data e hora de publicação
+    ID          int     `json:"id"`
+    Title       string  `json:"title"`
+    Description string  `json:"description"`
+    Price       float64 `json:"price"`
+    CategoryID  int     `json:"category_id"`
+    UserID      int     `json:"user_id"`
+    Location    string  `json:"location"`
+    Photo       string  `json:"photo"`
 }
