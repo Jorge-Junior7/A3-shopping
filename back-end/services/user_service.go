@@ -1,27 +1,15 @@
 package services
 
 import (
-    "github.com/Jorge-Junior7/A3shopping/back-end/models"
-    "github.com/Jorge-Junior7/A3shopping/back-end/db"
+	"github.com/Jorge-Junior7/A3shopping/back-end/db"
+	"github.com/Jorge-Junior7/A3shopping/back-end/models"
 )
 
+// RegisterUser insere um novo usuário no banco de dados
 func RegisterUser(user models.User) error {
-    // Ajuste os nomes das colunas para corresponder ao banco de dados
-    _, err := db.DB.Exec(
-        "INSERT INTO users (full_name, birthdate, cpf, nickname, profile_photo, location, email, password) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
-        user.FullName, 
-        user.BirthDate, 
-        user.CPF, 
-        user.Nickname, 
-        user.ProfilePhoto, 
-        user.Location, 
-        user.Email, 
-        user.Password,
-    )
-    
-    if err != nil {
-        return err // Retorna o erro para tratamento posterior
-    }
+	query := `INSERT INTO users (full_name, birthdate, cpf, nickname, location, email, password, recovery_phrase) 
+	          VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`
 
-    return nil // Retorna nil se a inserção for bem-sucedida
+	_, err := db.DB.Exec(query, user.FullName, user.BirthDate, user.CPF, user.Nickname, user.Location, user.Email, user.Password, user.RecoveryPhrase)
+	return err
 }

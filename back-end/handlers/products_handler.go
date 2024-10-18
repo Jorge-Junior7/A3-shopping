@@ -8,19 +8,19 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// AddProduct adiciona um novo produto ao banco de dados.
 func AddProduct(c *gin.Context) {
 	var product models.Product
-	
-	// Bind JSON input to the Product struct
+
+	// Faz o Bind do JSON para a estrutura de produto
 	if err := c.ShouldBindJSON(&product); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Dados inválidos"})
 		return
 	}
 
-	// Inserir o produto no banco de dados
-	_, err := db.DB.Exec(
-		"INSERT INTO products (title, description, price, category_id, user_id, location, photo) VALUES ($1, $2, $3, $4, $5, $6, $7)",
+	// Tenta inserir o produto no banco de dados
+	query := `INSERT INTO products (title, description, price, category_id, user_id, location, photo) 
+			  VALUES ($1, $2, $3, $4, $5, $6, $7)`
+	_, err := db.DB.Exec(query, 
 		product.Title,
 		product.Description,
 		product.Price,
@@ -29,13 +29,18 @@ func AddProduct(c *gin.Context) {
 		product.Location,
 		product.Photo,
 	)
+
+	// Verifica se houve erro na inserção
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Erro ao adicionar o produto"})
+		// Logar o erro para rastreamento
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Erro ao adicionar o produto", "details": err.Error()})
 		return
 	}
 
+	// Resposta de sucesso
 	c.JSON(http.StatusOK, gin.H{"message": "Produto adicionado com sucesso"})
 }
+
 
 // GetProducts recupera todos os produtos do banco de dados.
 func GetProducts(c *gin.Context) {

@@ -10,4 +10,5 @@ type User struct {
 	Location     string `json:"location"`
 	Email        string `json:"email"`
 	Password     string `json:"password"`
+	RecoveryPhrase string `json:"recovery_phrase"`
 }
