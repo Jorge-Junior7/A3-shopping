@@ -12,6 +12,7 @@ import (
 	"github.com/Jorge-Junior7/A3shopping/back-end/models"
 	"github.com/Jorge-Junior7/A3shopping/back-end/services"
 	"github.com/gin-gonic/gin"
+	"golang.org/x/crypto/bcrypt"
 )
 
 // Função para gerar uma frase de recuperação aleatória
@@ -44,6 +45,8 @@ func Register(c *gin.Context) {
 	}
 	if user.CPF == "" {
 		errors["cpf"] = "O CPF é obrigatório"
+	} else if !isValidCPF(user.CPF) {
+		errors["cpf"] = "CPF inválido"
 	}
 	if user.Nickname == "" {
 		errors["nickname"] = "O apelido é obrigatório"
@@ -79,6 +82,15 @@ func Register(c *gin.Context) {
 
 	// Gera e atribui uma frase de recuperação ao usuário
 	user.RecoveryPhrase = generateRecoveryPhrase()
+
+	// Encripta a senha do usuário
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
+	if err != nil {
+		log.Printf("Erro ao encriptar a senha: %v", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Erro ao registrar usuário"})
+		return
+	}
+	user.Password = string(hashedPassword) // Armazena a senha encriptada
 
 	// Insere o usuário no banco de dados
 	if err := services.RegisterUser(user); err != nil {
@@ -121,4 +133,51 @@ func isValidPassword(password string) bool {
 	hasSpecial := regexp.MustCompile(`[!@#$%^&*(),.?":{}|<>]`).MatchString(password)
 
 	return hasUpper && hasLower && hasNumber && hasSpecial
+}
+
+// Função para validar CPF
+func isValidCPF(cpf string) bool {
+	// Remove todos os caracteres não numéricos
+	re := regexp.MustCompile(`[^\d]`)
+	cpf = re.ReplaceAllString(cpf, "")
+
+	// Verifica se o CPF tem 11 dígitos
+	if len(cpf) != 11 {
+		return false
+	}
+
+	// Verifica se todos os dígitos são iguais (ex: "11111111111" não é válido)
+	for i := 1; i < len(cpf); i++ {
+		if cpf[i] != cpf[0] {
+			break
+		}
+		if i == len(cpf)-1 {
+			return false
+		}
+	}
+
+	// Calcula o primeiro dígito verificador
+	sum := 0
+	for i := 0; i < 9; i++ {
+		num := int(cpf[i] - '0')
+		sum += num * (10 - i)
+	}
+	d1 := 11 - (sum % 11)
+	if d1 >= 10 {
+		d1 = 0
+	}
+
+	// Calcula o segundo dígito verificador
+	sum = 0
+	for i := 0; i < 10; i++ {
+		num := int(cpf[i] - '0')
+		sum += num * (11 - i)
+	}
+	d2 := 11 - (sum % 11)
+	if d2 >= 10 {
+		d2 = 0
+	}
+
+	// Verifica se os dígitos calculados são iguais aos do CPF
+	return d1 == int(cpf[9]-'0') && d2 == int(cpf[10]-'0')
 }

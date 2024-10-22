@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"net/http"
-
 	"github.com/Jorge-Junior7/A3shopping/back-end/db"
 	"github.com/Jorge-Junior7/A3shopping/back-end/models"
 	"github.com/gin-gonic/gin"
@@ -15,6 +14,43 @@ func AddProduct(c *gin.Context) {
 	// Faz o Bind do JSON para a estrutura de produto
 	if err := c.ShouldBindJSON(&product); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Dados inválidos"})
+		return
+	}
+
+	// Validação de campos obrigatórios
+	var missingFields []string
+
+	if product.Title == "" {
+		missingFields = append(missingFields, "título")
+	}
+	if product.Description == "" {
+		missingFields = append(missingFields, "descrição")
+	}
+	if product.Price == 0 {
+		missingFields = append(missingFields, "preço")
+	}
+	if product.Category == "" {
+		missingFields = append(missingFields, "categoria")
+	}
+	if product.Location == "" {
+		missingFields = append(missingFields, "localização")
+	}
+
+	// Foto não é obrigatória, então não a validamos
+
+	// Verifica se há campos faltando
+	if len(missingFields) > 0 {
+		// Se houver mais de um campo faltando
+		if len(missingFields) > 1 {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "Preencha os campos obrigatórios:",
+			})
+		} else {
+			// Se houver apenas um campo faltando
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "Preencha o campo " + missingFields[0],
+			})
+		}
 		return
 	}
 
