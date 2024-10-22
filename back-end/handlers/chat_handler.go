@@ -10,10 +10,9 @@ import (
 
 // Message representa uma mensagem de chat
 type Message struct {
-	ProductID   int    `json:"product_id"`
-	SenderID    int    `json:"sender_id"`
-	ReceiverID  int    `json:"receiver_id"`
-	Content     string `json:"content"`
+	SenderID   int    `json:"sender_id"`
+	ReceiverID int    `json:"receiver_id"`
+	Content    string `json:"content"`
 }
 
 // ChatHandler gerencia as mensagens de chat
@@ -46,22 +45,30 @@ func (ch *ChatHandler) SendMessage(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "Mensagem enviada com sucesso"})
 }
 
-// GetMessages recupera todas as mensagens relacionadas a um produto específico
+// GetMessages recupera todas as mensagens entre dois usuários
 func (ch *ChatHandler) GetMessages(c *gin.Context) {
-	productIDStr := c.Param("product_id")
-	productID, err := strconv.Atoi(productIDStr)
+	senderIDStr := c.Param("sender_id")
+	receiverIDStr := c.Param("receiver_id")
+
+	senderID, err := strconv.Atoi(senderIDStr)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "ID do produto inválido"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "ID do remetente inválido"})
+		return
+	}
+
+	receiverID, err := strconv.Atoi(receiverIDStr)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "ID do destinatário inválido"})
 		return
 	}
 
 	ch.mu.Lock()
 	defer ch.mu.Unlock()
 
-	// Filtra mensagens pelo ID do produto
+	// Filtra mensagens entre os usuários
 	var filteredMessages []Message
 	for _, msg := range ch.messages {
-		if msg.ProductID == productID {
+		if (msg.SenderID == senderID && msg.ReceiverID == receiverID) || (msg.SenderID == receiverID && msg.ReceiverID == senderID) {
 			filteredMessages = append(filteredMessages, msg)
 		}
 	}

@@ -8,17 +8,14 @@ import (
 func SetupRoutes() *gin.Engine {
 	router := gin.Default()
 
-	// Instanciar o handler de chat
-	chatHandler := handlers.NewChatHandler()
-
 	// Definir as rotas
 	router.POST("/register", handlers.Register)
 	router.POST("/login", handlers.Login)
 	router.POST("/login/reset", handlers.LoginReset)
 
-	// Rotas de chat usando o handler de chat
-	router.POST("/messages", chatHandler.SendMessage) // Enviar mensagem
-	router.GET("/messages/:product_id", chatHandler.GetMessages) // Recuperar mensagens por ID do produto
+	// Rotas de mensagens
+	router.POST("/messages", handlers.AddMessage) // Enviar mensagem
+	router.GET("/messages/:sender_id/:receiver_id", handlers.GetMessages) // Recuperar mensagens entre dois usuários
 
 	// Rotas para produtos
 	router.POST("/products", handlers.AddProduct)
