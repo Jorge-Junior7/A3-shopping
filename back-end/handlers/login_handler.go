@@ -30,9 +30,12 @@ func Login(c *gin.Context) {
 		return
 	}
 
+	log.Println("Usuário encontrado:", user.FullName) // Log para verificar se o usuário foi encontrado
+
 	// Compara a senha fornecida com a senha armazenada
 	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(input.Password))
 	if err != nil {
+		log.Println("Erro na comparação da senha:", err) // Log para verificar se houve erro na comparação
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Usuário ou senha incorretos"})
 		return
 	}

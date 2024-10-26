@@ -1,23 +1,23 @@
-/* Logo styles */
+/* Logo */
 .logo {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 .logo img {
-  max-width: 150px; /* Adjust the size as needed */
+  max-width: 150px;
 }
 
-/* Login box styles */
+/* Caixa de Login */
 .login-box {
   position: absolute;
-  top: 50%;
+  top: 53%;
   left: 50%;
   width: 400px;
   padding: 30px;
-  transform: translate(-50%, -55%);
-  background: rgba(0,0,0,.9);
-  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+  transform: translate(-50%, -50%);
+  background: #000000;
+  box-shadow: 0 15px 25px #000000;
   border-radius: 10px;
 }
 
@@ -29,23 +29,23 @@
   font-weight: bold;
 }
 
-.login-box .user-box {
+.user-box {
   position: relative;
 }
 
-.login-box .user-box input {
+.user-box input {
   width: 100%;
   padding: 10px 0;
   font-size: 16px;
   color: #aaa;
-  margin-bottom: 20px; /* Adjust the bottom margin here */
+  margin-bottom: 20px;
   border: none;
   border-bottom: 1px solid #fff;
   background: transparent;
   outline: none;
 }
 
-.login-box .user-box label {
+.user-box label {
   position: absolute;
   top: 0;
   left: 0;
@@ -53,45 +53,53 @@
   font-size: 16px;
   color: #0bb1cb;
   pointer-events: none;
-  transition: .5s;
+  transition: 0.5s;
 }
 
-.login-box .user-box input:focus ~ label,
-.login-box .user-box input:valid ~ label {
+.user-box input:focus ~ label,
+.user-box input:not(:placeholder-shown) ~ label {
   top: -20px;
   font-size: 12px;
 }
 
-.login-box .submit {
+/* Estilos de Erro */
+.error {
+  color: red;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+
+/* Botão de Envio */
+.submit {
   position: relative;
   display: block;
   width: 150px;
-  margin: 0 auto;
-  padding: 20px 20px;
+  margin: 20px auto;
+  padding: 20px;
   font-weight: bold;
-  color: #aaa;
+  color: #0bb1cb;
+  background-color: #000000;
   font-size: 16px;
   text-decoration: none;
   text-transform: uppercase;
   overflow: hidden;
-  transition: .5s;
-  margin-top: 20px; /* Adjust the top margin here */
-  letter-spacing: 3px;
-  text-align: center;
+  transition: 0.5s;
 }
 
-.login-box .submit:hover {
-  background: #25496b;
-  color: #272727;
+.submit:hover {
+  background: #000000;
+  color: #aaa;
   border-radius: 5px;
 }
 
-.login-box .submit span {
+.submit span {
   position: absolute;
   display: block;
 }
 
-.login-box .submit span:nth-child(1) {
+.submit span:nth-child(1) {
   top: 0;
   left: -100%;
   width: 100%;
@@ -101,53 +109,41 @@
 }
 
 @keyframes btn-anim1 {
-  0% {
-    left: -100%;
-  }
-  50%, 100% {
-    left: 100%;
-  }
+  0% { left: -100%; }
+  50%, 100% { left: 100%; }
 }
 
-.login-box .submit span:nth-child(2) {
+.submit span:nth-child(2) {
   top: -100%;
   right: 0;
   width: 2px;
   height: 100%;
   background: linear-gradient(180deg, transparent, #0bb1cb);
   animation: btn-anim2 1.5s linear infinite;
-  animation-delay: .375s;
+  animation-delay: 0.375s;
 }
 
 @keyframes btn-anim2 {
-  0% {
-    top: -100%;
-  }
-  50%, 100% {
-    top: 100%;
-  }
+  0% { top: -100%; }
+  50%, 100% { top: 100%; }
 }
 
-.login-box .submit span:nth-child(3) {
+.submit span:nth-child(3) {
   bottom: 0;
   right: -100%;
   width: 100%;
   height: 2px;
   background: linear-gradient(270deg, transparent, #0bb1cb);
   animation: btn-anim3 1.5s linear infinite;
-  animation-delay: .75s;
+  animation-delay: 0.75s;
 }
 
 @keyframes btn-anim3 {
-  0% {
-    right: -100%;
-  }
-  50%, 100% {
-    right: 100%;
-  }
+  0% { right: -100%; }
+  50%, 100% { right: 100%; }
 }
 
-.login-box .submit span:nth-child(4) {
+.submit span:nth-child(4) {
   bottom: -100%;
   left: 0;
   width: 2px;
@@ -158,31 +154,27 @@
 }
 
 @keyframes btn-anim4 {
-  0% {
-    bottom: -100%;
-  }
-  50%, 100% {
-    bottom: 100%;
-  }
+  0% { bottom: -100%; }
+  50%, 100% { bottom: 100%; }
 }
 
-/* Footer text styles */
-.login-box p:last-child, .login-box p {
-  color: #aaa; /* Default color for text */
-  font-size: 14px; /* Font size */
-  font-family: Arial, sans-serif; /* Default font */
+/* Estilos de Texto do Rodapé */
+.login-box p:last-child,
+.login-box p {
+  color: #aaa;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
 }
 
-/* Unified styles for "Register" and "Forgot password" links */
-.login-box a.register, .login-box a.forgot-password {
+.register, .forgot-password {
   color: #0bb1cb;
   font-size: 14px;
   font-family: Arial, sans-serif;
   text-decoration: none;
-  font-weight: bold; /* To ensure consistency */
+  font-weight: bold;
 }
 
-.login-box a.register:hover, .login-box a.forgot-password:hover {
+.register:hover, .forgot-password:hover {
   color: #aaa;
   border-radius: 5px;
 }

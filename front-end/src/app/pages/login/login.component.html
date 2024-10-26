@@ -1,33 +1,43 @@
 <div class="logo">
-  <img src="assets/logo.png" alt="fdsa" srcset="">
+  <img src="assets/logo.png" alt="Logo" />
 </div>
 
 <div class="login-box">
   <p>Login</p>
-  <form>
+  <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
     <div class="user-box">
-      <input required="" type="text" id="login-email">
+      <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="error">
+        E-mail inválido.
+      </div>
+      <input formControlName="email" required type="text" id="login-email" [ngClass]="{'is-invalid': loginForm.get('email')?.invalid && loginForm.get('email')?.touched}" />
       <label>Email</label>
     </div>
     <div class="user-box">
-      <input required="" type="password" id="login-password">
-      <label>Password</label>
+      <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error">
+        Senha é obrigatória.
+      </div>
+      <input formControlName="password" required type="password" id="login-password" [ngClass]="{'is-invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched}" />
+      <label>Senha</label>
     </div>
 
-    <a routerLink="/home" class="submit">
+    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p> <!-- Mensagem de erro -->
+
+    <button type="submit" class="submit" [disabled]="isLoading">
       <span></span>
       <span></span>
       <span></span>
       <span></span>
-      Submit
-    </a>
+      Login
+    </button>
+
+    <div *ngIf="isLoading">Carregando...</div>
   </form>
 
-  <p>Forgot your password?
-    <a routerLink="/reset-password" class="forgot-password">Click here!</a>
+  <p>Esqueceu Senha?
+    <a routerLink="/reset-password" class="forgot-password">Alterar Senha</a>
   </p>
 
-  <p>Don't have an account?
-    <a routerLink="/register" class="register">Register!</a>
+  <p>Não tem uma conta?
+    <a routerLink="/register" class="register">Criar Conta</a>
   </p>
 </div>
