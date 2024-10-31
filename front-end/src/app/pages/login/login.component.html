@@ -1,23 +1,14 @@
-<div class="logo">
-  <img src="assets/logo.png" alt="Logo" />
-</div>
-
 <div class="login-box">
-  <p>Login</p>
+  <h2>Login</h2>
   <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
     <div class="user-box">
-      <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="error">
-        E-mail inválido.
-      </div>
-      <input formControlName="email" required type="text" id="login-email" [ngClass]="{'is-invalid': loginForm.get('email')?.invalid && loginForm.get('email')?.touched}" />
-      <label>Email</label>
+      <label for="login-email">Email:</label>
+      <input formControlName="email" type="email" id="login-email" required [ngClass]="{'is-invalid': loginForm.get('email')?.invalid && loginForm.get('email')?.touched}" />
     </div>
+
     <div class="user-box">
-      <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error">
-        Senha é obrigatória.
-      </div>
-      <input formControlName="password" required type="password" id="login-password" [ngClass]="{'is-invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched}" />
-      <label>Senha</label>
+      <label for="login-password">Senha:</label>
+      <input formControlName="password" type="password" id="login-password" required [ngClass]="{'is-invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched}" />
     </div>
 
     <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p> <!-- Mensagem de erro -->

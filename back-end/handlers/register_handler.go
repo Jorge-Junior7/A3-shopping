@@ -2,11 +2,15 @@ package handlers
 
 import (
 	"crypto/rand"
+	"database/sql"
 	"encoding/hex"
+	"fmt"
 	"log"
 	"net/http"
+	"path/filepath"
 	"regexp"
 	"strings"
+	"time"
 
 	"github.com/Jorge-Junior7/A3shopping/back-end/db"
 	"github.com/Jorge-Junior7/A3shopping/back-end/models"
@@ -15,9 +19,36 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+// Função para lidar com o upload de imagens
+func UploadImage(c *gin.Context) (string, error) {
+	file, err := c.FormFile("profilePhoto")
+	if err != nil {
+		log.Printf("Erro ao obter o arquivo: %v", err)
+		return "", fmt.Errorf("erro ao obter o arquivo: %w", err)
+	}
+
+	ext := filepath.Ext(file.Filename)
+	if ext != ".jpg" && ext != ".jpeg" && ext != ".png" {
+		log.Printf("Tipo de arquivo inválido: %s", ext)
+		return "", fmt.Errorf("tipo de arquivo inválido; apenas JPG e PNG são aceitos")
+	}
+
+	deviceName := strings.Split(file.Filename, ".")[0]
+	newFileName := fmt.Sprintf("%s_%d%s", deviceName, time.Now().UnixNano(), ext)
+	dst := filepath.Join("uploads", newFileName)
+
+	if err := c.SaveUploadedFile(file, dst); err != nil {
+		log.Printf("Erro ao salvar o arquivo: %v", err)
+		return "", fmt.Errorf("erro ao salvar o arquivo: %w", err)
+	}
+
+	log.Printf("Arquivo salvo com sucesso: %s", dst)
+	return dst, nil
+}
+
 // Função para gerar uma frase de recuperação aleatória
 func generateRecoveryPhrase() string {
-	bytes := make([]byte, 16) // Gera uma frase de 16 bytes
+	bytes := make([]byte, 16)
 	if _, err := rand.Read(bytes); err != nil {
 		log.Println("Erro ao gerar frase de recuperação:", err)
 		return ""
@@ -27,16 +58,44 @@ func generateRecoveryPhrase() string {
 
 // Função de Registro do Usuário
 func Register(c *gin.Context) {
-	var user models.User
-	if err := c.ShouldBindJSON(&user); err != nil {
+	// Processar os dados do formulário multipart
+	if err := c.Request.ParseMultipartForm(10 << 20); err != nil {
+		log.Printf("Erro ao fazer parsing do formulário: %v", err)
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Dados inválidos"})
 		return
 	}
 
-	// Validações de campos obrigatórios e outras regras
+	// Verifique e obtenha cada campo do formulário
+	user := models.User{
+		FullName:   c.PostForm("full_name"),
+		BirthDate:  c.PostForm("birthdate"),
+		CPF:        c.PostForm("cpf"),
+		Nickname:   c.PostForm("nickname"),
+		Location:   c.PostForm("location"),
+		Email:      c.PostForm("email"),
+		Password:   c.PostForm("password"),
+	}
+
+	// Logs para verificar cada campo recebido
+	log.Printf("Nome completo: %s", user.FullName)
+	log.Printf("Data de nascimento: %s", user.BirthDate)
+	log.Printf("CPF: %s", user.CPF)
+	log.Printf("Apelido: %s", user.Nickname)
+	log.Printf("Localização: %s", user.Location)
+	log.Printf("Email: %s", user.Email)
+	log.Printf("Senha: %s", user.Password)
+
+	fileName, err := UploadImage(c)
+	if err != nil {
+		log.Printf("Erro ao fazer upload da imagem: %v", err)
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	user.ProfilePhoto = fileName
+
 	errors := make(map[string]string)
 
-	// Validações de campos
+	// Verificação de campos obrigatórios e validações específicas
 	if user.FullName == "" {
 		errors["full_name"] = "O nome completo é obrigatório"
 	}
@@ -65,34 +124,31 @@ func Register(c *gin.Context) {
 		errors["password"] = "A senha deve ter pelo menos 8 caracteres, uma letra maiúscula, uma letra minúscula, um número e um caractere especial."
 	}
 
-	// Verifica se existem erros de validação
 	if len(errors) > 0 {
+		log.Printf("Erros de validação: %+v", errors)
 		c.JSON(http.StatusBadRequest, gin.H{"errors": errors})
 		return
 	}
 
-	// Verifica se o usuário já existe
 	var existingUserID int
-	err := db.DB.QueryRow("SELECT id FROM users WHERE email = $1", user.Email).Scan(&existingUserID)
+	err = db.DB.QueryRow("SELECT id FROM users WHERE email = $1", user.Email).Scan(&existingUserID)
 	if err == nil {
 		errors["email"] = "Este email já está cadastrado"
 		c.JSON(http.StatusConflict, gin.H{"errors": errors})
 		return
+	} else if err != sql.ErrNoRows {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Erro ao verificar se o usuário existe"})
+		return
 	}
 
-	// Gera e atribui uma frase de recuperação ao usuário
 	user.RecoveryPhrase = generateRecoveryPhrase()
-
-	// Encripta a senha do usuário
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
 	if err != nil {
-		log.Printf("Erro ao encriptar a senha: %v", err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Erro ao registrar usuário"})
 		return
 	}
-	user.Password = string(hashedPassword) // Armazena a senha encriptada
+	user.Password = string(hashedPassword)
 
-	// Insere o usuário no banco de dados
 	if err := services.RegisterUser(user); err != nil {
 		if strings.Contains(err.Error(), "duplicate key value violates unique constraint") {
 			if strings.Contains(err.Error(), "users_email_key") {
@@ -104,25 +160,21 @@ func Register(c *gin.Context) {
 			c.JSON(http.StatusConflict, gin.H{"errors": errors})
 			return
 		}
-		log.Printf("Erro ao registrar usuário: %v", err) // Loga o erro detalhado
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Erro ao registrar usuário"})
 		return
 	}
 
-	// Resposta de sucesso, incluindo a frase de recuperação
 	c.JSON(http.StatusOK, gin.H{
 		"message":         "Usuário registrado com sucesso!",
-		"recovery_phrase": user.RecoveryPhrase, // Retorna a frase de recuperação ao usuário
+		"recovery_phrase": user.RecoveryPhrase,
 	})
 }
 
-// Função para validar o formato do email
 func isValidEmail(email string) bool {
 	re := regexp.MustCompile(`^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`)
 	return re.MatchString(email)
 }
 
-// Função para validar a força da senha
 func isValidPassword(password string) bool {
 	if len(password) < 8 {
 		return false
@@ -135,49 +187,8 @@ func isValidPassword(password string) bool {
 	return hasUpper && hasLower && hasNumber && hasSpecial
 }
 
-// Função para validar CPF
 func isValidCPF(cpf string) bool {
-	// Remove todos os caracteres não numéricos
 	re := regexp.MustCompile(`[^\d]`)
 	cpf = re.ReplaceAllString(cpf, "")
-
-	// Verifica se o CPF tem 11 dígitos
-	if len(cpf) != 11 {
-		return false
-	}
-
-	// Verifica se todos os dígitos são iguais (ex: "11111111111" não é válido)
-	for i := 1; i < len(cpf); i++ {
-		if cpf[i] != cpf[0] {
-			break
-		}
-		if i == len(cpf)-1 {
-			return false
-		}
-	}
-
-	// Calcula o primeiro dígito verificador
-	sum := 0
-	for i := 0; i < 9; i++ {
-		num := int(cpf[i] - '0')
-		sum += num * (10 - i)
-	}
-	d1 := 11 - (sum % 11)
-	if d1 >= 10 {
-		d1 = 0
-	}
-
-	// Calcula o segundo dígito verificador
-	sum = 0
-	for i := 0; i < 10; i++ {
-		num := int(cpf[i] - '0')
-		sum += num * (11 - i)
-	}
-	d2 := 11 - (sum % 11)
-	if d2 >= 10 {
-		d2 = 0
-	}
-
-	// Verifica se os dígitos calculados são iguais aos do CPF
-	return d1 == int(cpf[9]-'0') && d2 == int(cpf[10]-'0')
+	return len(cpf) == 11
 }

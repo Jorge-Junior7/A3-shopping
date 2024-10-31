@@ -7,9 +7,9 @@ import (
 
 // RegisterUser insere um novo usuário no banco de dados
 func RegisterUser(user models.User) error {
-	query := `INSERT INTO users (full_name, birthdate, cpf, nickname, location, email, password, recovery_phrase) 
-	          VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`
+	query := `INSERT INTO users (full_name, birthdate, cpf, nickname, location, email, password, recovery_phrase, profile_photo) 
+	          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`
 
-	_, err := db.DB.Exec(query, user.FullName, user.BirthDate, user.CPF, user.Nickname, user.Location, user.Email, user.Password, user.RecoveryPhrase)
+	_, err := db.DB.Exec(query, user.FullName, user.BirthDate, user.CPF, user.Nickname, user.Location, user.Email, user.Password, user.RecoveryPhrase, user.ProfilePhoto)
 	return err
 }

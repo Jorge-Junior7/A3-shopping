@@ -1,1 +1,59 @@
-<p>register works!</p>
+<div class="login-box">
+  <h2>Cadastrar-se</h2>
+
+  <div class="profile-section">
+    <div class="profile-photo-frame" (click)="fileInput.click()">
+      <img id="profilePhoto" alt="Foto de perfil" class="profile-photo" />
+      <div class="placeholder">Clique para adicionar foto</div>
+      <input type="file" accept="image/*" (change)="onFileSelected($event)" #fileInput style="display:none;">
+    </div>
+  </div>
+
+  <form [formGroup]="registerForm" (ngSubmit)="submitForm()">
+    <div class="form-columns">
+      <div class="column">
+        <div class="user-box-inline">
+          <label for="login-email">Email:</label>
+          <input required formControlName="email" id="login-email" placeholder="exemplo@gmail.com" aria-describedby="emailHelp">
+        </div>
+        <div class="user-box-inline">
+          <label for="login-password">Senha:</label>
+          <input required type="password" formControlName="password" id="login-password" placeholder="Mínimo 8 caracteres" aria-describedby="passwordHelp">
+        </div>
+      </div>
+      <div class="column">
+        <div class="user-box-inline">
+          <label for="full_name">Nome Completo:</label>
+          <input required formControlName="full_name" id="full_name" placeholder="Seu Nome Completo">
+        </div>
+        <div class="user-box-inline">
+          <label for="birthdate">Data de Nascimento:</label>
+          <input required formControlName="birthdate" id="birthdate" type="date">
+        </div>
+
+      </div>
+    </div>
+    <div class="form-columns">
+      <div class="column">
+        <div class="user-box-inline">
+          <label for="cpf">CPF:</label>
+          <input required formControlName="cpf" id="cpf" placeholder="000.000.000-00" aria-describedby="cpfHelp">
+        </div>
+        <div class="user-box-inline">
+          <label for="nickname">Apelido:</label>
+          <input required formControlName="nickname" id="nickname" placeholder="Seu Apelido" aria-describedby="nicknameHelp">
+        </div>
+      </div>
+      <div class="column">
+        <div class="user-box-inline">
+          <label for="location">Localização:</label>
+          <input required formControlName="location" id="location" placeholder="Sua Localização" aria-describedby="locationHelp">
+        </div>
+      </div>
+    </div>
+    <div class="form-buttons">
+      <button type="submit" class="submit">Cadastrar</button>
+    </div>
+    <div *ngIf="errorMessage" class="error-messages">{{ errorMessage }}</div>
+  </form>
+</div>
