@@ -6,11 +6,12 @@ import { MenuComponent } from './components/menu/menu.component';
 import { MyAdsComponent } from './pages/my-ads/my-ads.component';
 import { LoginResetComponent } from './pages/login-reset/login-reset.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { ProductAddComponent } from './pages/product-add/product-add.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, LoginComponent, HomeComponent, MenuComponent, MyAdsComponent, LoginResetComponent, RegisterComponent],
+  imports: [RouterOutlet, RouterLink, LoginComponent, HomeComponent, MenuComponent, MyAdsComponent, LoginResetComponent, RegisterComponent, ProductAddComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

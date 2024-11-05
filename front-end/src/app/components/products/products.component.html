@@ -1,6 +1,11 @@
 <div class="container">
-  <h1>Produtos à Venda</h1>
+  <!-- Campo de busca e botão de pesquisa -->
+  <div class="search-bar">
+    <input type="text" placeholder="Pesquisar produtos..." />
+    <button class="search-button">Pesquisar</button>
+  </div>
 
+  <!-- Lista de produtos com espaçamento simétrico -->
   <div class="product-list">
     <div *ngFor="let product of products" class="product-item">
       <img [src]="product.imageUrl" alt="{{product.name}}">

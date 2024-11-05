@@ -9,5 +9,5 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   styleUrl: './menu.component.css'
 })
 export class MenuComponent {
- 
+
 }

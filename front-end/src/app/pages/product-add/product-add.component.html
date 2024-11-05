@@ -1,0 +1,66 @@
+<app-menu></app-menu>
+<div class="container">
+  <h2>Adicionar Produto</h2>
+
+  <div class="product-title">
+    <h3>Título do Produto</h3>
+    <input type="text" placeholder="Ex: Uno 2004 com escada em cima">
+  </div>
+
+  <!-- Seção de foto -->
+  <div class="image-upload">
+    <h3>Foto</h3>
+    <div class="image-container">
+      <!-- Imagem Principal -->
+      <div class="main-image" (click)="fileInput.click()">
+        <ng-container *ngIf="selectedImages.length > 0; else addImage">
+          <img [src]="selectedImages[0]" alt="Imagem Principal" class="display-image" />
+        </ng-container>
+        <ng-template #addImage>
+          <span>Adicionar Imagem</span>
+        </ng-template>
+      </div>
+
+      <!-- Imagens Laterais -->
+      <div class="side-images">
+        <div *ngFor="let image of sideImages; let i = index" class="side-image" (click)="fileInput.click()">
+          <img *ngIf="image" [src]="image" alt="Imagem {{i + 1}}" class="display-image" />
+          <span *ngIf="!image">+</span>
+        </div>
+      </div>
+    </div>
+    <input type="file" #fileInput style="display: none;" (change)="onFileSelected($event)">
+  </div>
+
+  <div class="category-condition">
+    <div class="category">
+      <h3>Selecionar Categoria</h3>
+      <label><input type="radio" name="category"> Veículos</label>
+      <label><input type="radio" name="category"> Locações</label>
+      <label><input type="radio" name="category"> Roupas e Calçados</label>
+      <label><input type="radio" name="category"> Móveis</label>
+      <label><input type="radio" name="category"> Eletrônicos</label>
+      <label><input type="radio" name="category"> Outros</label>
+    </div>
+    <div class="condition">
+      <h3>Selecionar Condição</h3>
+      <label><input type="radio" name="condition"> Novo</label>
+      <label><input type="radio" name="condition"> Semi-novo</label>
+      <label><input type="radio" name="condition"> Em Bom Estado</label>
+      <label><input type="radio" name="condition"> Condições Razoáveis</label>
+      <label><input type="radio" name="condition"> Extênicos</label>
+    </div>
+  </div>
+
+  <div class="description">
+    <h3>Descrição do Produto</h3>
+    <textarea rows="4" placeholder="Descreva aqui"></textarea>
+  </div>
+
+  <div class="price-container">
+    <div class="price-label">Informe o Valor</div>
+    <input type="text" class="price-input" placeholder="R$">
+  </div>
+
+  <button class="submit-btn">Enviar</button>
+</div>

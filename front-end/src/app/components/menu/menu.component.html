@@ -1,29 +1,30 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<!-- Campo de pesquisa exclusivo para produtos -->
+<div class="search-container">
+  <input type="text" placeholder="Pesquisar Produtos..." id="searchInput">
+  <button class="search-btn"><i class="fa fa-fw fa-search"></i></button>
+</div>
+
 <!-- O menu -->
 <div class="sidebar">
   <!-- Logo -->
   <div class="logo">
-    <a routerLink="/home"><img src="assets/logo.png" alt="Logo" srcset=""></a>
+    <a routerLink="/home"><img src="assets/logo.png" alt="Logo"></a>
   </div>
 
-  <!-- Campo de pesquisa com ícone de lupa -->
-  <div class="search-container">
-    <input type="text" placeholder="Pesquisar..." id="searchInput">
-    <button class="search-btn"><i class="fa fa-fw fa-search"></i></button>
+  <!-- Links do menu -->
+  <div class="menu-links">
+    <a routerLink="/meus-anuncios"><i class="fa fa-fw fa-envelope"></i> Meus Anúncios</a>
+    <a routerLink="/product-add"><i class="fa fa-fw fa-plus"></i> Adicionar Produto</a>
+    <a routerLink="/chat"><i class="fa fa-fw fa-comments"></i> Chat</a>
+    <a routerLink="/saved"><i class="fa fa-fw fa-bookmark"></i> Salvos</a>
   </div>
-
-
-
-
-  <a routerLink="/myAds"><i class="fa fa-fw fa-envelope"></i> Meus Anúncios</a>
 
   <!-- Bolinha de perfil -->
   <div class="perfil">
     <a routerLink="/profile" class="profile-icon"><i class="fa fa-fw fa-user-circle"></i></a>
   </div>
 </div>
-
-
 
 

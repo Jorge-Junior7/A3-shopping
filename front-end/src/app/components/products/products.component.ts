@@ -1,10 +1,11 @@
 import { CommonModule, NgFor } from '@angular/common';
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [NgFor, CommonModule],  // Correto para usar NgFor e funcionalidades comuns do Angular
+  imports: [NgFor, CommonModule, RouterLink],  // Correto para usar NgFor e funcionalidades comuns do Angular
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']  // Remover exports, não é necessário aqui
 })
@@ -27,7 +28,33 @@ export class ProductsComponent {
       price: '7.000 R$',
       location: 'Mossoró/RN',
       imageUrl: 'link-da-imagem-da-moto',
-    }
+    },
+    {
+      name: 'Honda 150 unico dono',
+      price: '7.000 R$',
+      location: 'Mossoró/RN',
+      imageUrl: 'link-da-imagem-da-moto',
+    }, {
+      name: 'Honda 150 unico dono',
+      price: '7.000 R$',
+      location: 'Mossoró/RN',
+      imageUrl: 'link-da-imagem-da-moto',
+    }, {
+      name: 'Honda 150 unico dono',
+      price: '7.000 R$',
+      location: 'Mossoró/RN',
+      imageUrl: 'link-da-imagem-da-moto',
+    }, {
+      name: 'Honda 150 unico dono',
+      price: '7.000 R$',
+      location: 'Mossoró/RN',
+      imageUrl: 'link-da-imagem-da-moto',
+    }, {
+      name: 'Honda 150 unico dono',
+      price: '7.000 R$',
+      location: 'Mossoró/RN',
+      imageUrl: 'link-da-imagem-da-moto',
+    },
     // Adicione mais produtos aqui
   ];
 }

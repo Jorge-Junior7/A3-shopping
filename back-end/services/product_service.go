@@ -21,8 +21,8 @@ func AddProduct(c *gin.Context) {
 
 	// Tenta inserir o produto no banco de dados
 	query := `
-		INSERT INTO products (title, description, price, category, location, photo)
-		VALUES ($1, $2, $3, $4, $5, $6) RETURNING id
+		INSERT INTO products (title, description, price, category, photo1, photo2, photo3, photo4)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id
 	`
 
 	// Executa a query e obtém o id gerado
@@ -31,8 +31,10 @@ func AddProduct(c *gin.Context) {
 		product.Description,
 		product.Price,
 		product.Category,
-		product.Location,
-		product.Photo,
+		product.Photo1,
+		product.Photo2,
+		product.Photo3,
+		product.Photo4,
 	).Scan(&product.ID)
 
 	if err != nil {

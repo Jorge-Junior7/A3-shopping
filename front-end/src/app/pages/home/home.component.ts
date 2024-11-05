@@ -5,8 +5,8 @@ import { ProductsComponent } from '../../components/products/products.component'
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [MenuComponent, ProductsComponent],  // Corrigido para ProductsComponent
+  imports: [MenuComponent, ProductsComponent],
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']  // Corrigido para styleUrls (plural)
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent {}
