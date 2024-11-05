@@ -67,13 +67,13 @@ func Register(c *gin.Context) {
 
 	// Verifique e obtenha cada campo do formulário
 	user := models.User{
-		FullName:   c.PostForm("full_name"),
-		BirthDate:  c.PostForm("birthdate"),
-		CPF:        c.PostForm("cpf"),
-		Nickname:   c.PostForm("nickname"),
-		Location:   c.PostForm("location"),
-		Email:      c.PostForm("email"),
-		Password:   c.PostForm("password"),
+		FullName:  c.PostForm("full_name"),
+		BirthDate: c.PostForm("birthdate"),
+		CPF:       c.PostForm("cpf"),
+		Nickname:  c.PostForm("nickname"),
+		Location:  c.PostForm("location"),
+		Email:     c.PostForm("email"),
+		Password:  c.PostForm("password"),
 	}
 
 	// Logs para verificar cada campo recebido
