@@ -3,11 +3,12 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RegisterService } from '../../services/api/register.service';
 import { CommonModule, NgIf } from '@angular/common';
+import { FinalRegistrationComponent } from '../final-registration/final-registration.component';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [RouterLink, RouterOutlet, CommonModule, ReactiveFormsModule, NgIf],
+  imports: [RouterLink, RouterOutlet, CommonModule, ReactiveFormsModule, NgIf, FinalRegistrationComponent],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
   encapsulation: ViewEncapsulation.None,

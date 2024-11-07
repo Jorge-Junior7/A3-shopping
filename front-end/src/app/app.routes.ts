@@ -6,6 +6,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { LoginResetComponent } from './pages/login-reset/login-reset.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ProductAddComponent } from './pages/product-add/product-add.component';
+import { FinalRegistrationComponent } from './pages/final-registration/final-registration.component';
 
 
 
@@ -16,5 +17,6 @@ export const routes: Routes = [
   {path: 'profile', component: ProfileComponent},
   {path: 'reset-password', component: LoginResetComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'product-add', component: ProductAddComponent}
+  {path: 'product-add', component: ProductAddComponent},
+  {path: 'final-registration', component: FinalRegistrationComponent},
 ];
