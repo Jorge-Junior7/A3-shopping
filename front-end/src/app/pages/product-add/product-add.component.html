@@ -1,15 +1,21 @@
 <app-menu></app-menu>
-<div class="container">
-  <h2>Adicionar Produto</h2>
 
+<div class="container-top">
+  <div class="texts">
+    <h2><i class="fa fa-plus" aria-hidden="true"></i> Adicionar Produto</h2>
+    <h5>Nesta página, você pode realizar o cadastro do seu produto com as informações e fotos relevantes.</h5>
+  </div>
+</div>
+
+<div class="container">
   <div class="product-title">
-    <h3>Título do Produto</h3>
+    <h3><i class="fa fa-file-text-o"> </i> Título do Produto</h3>
     <input type="text" placeholder="Ex: Uno 2004 com escada em cima" [(ngModel)]="productTitle">
   </div>
 
   <!-- Seção de foto -->
   <div class="image-upload">
-    <h3>Foto</h3>
+    <h3><i class="fa fa-photo"> </i> Foto</h3>
     <div class="image-container">
       <div class="main-image" (click)="fileInput.click()">
         <ng-container *ngIf="selectedImageUrls[0]; else addImage">
@@ -31,14 +37,14 @@
 
   <div class="category-condition">
     <div class="category">
-      <h3>Selecionar Categoria</h3>
+      <h3><i class="fa fa-list-alt"> </i> Categoria</h3>
       <label *ngFor="let category of categories">
         <input type="radio" name="category" [value]="category" [(ngModel)]="selectedCategory" required>
         {{ category }}
       </label>
     </div>
     <div class="condition">
-      <h3>Selecionar Condição</h3>
+      <h3><i class="fa fa-pencil"> </i> Condição</h3>
       <label *ngFor="let condition of conditions">
         <input type="radio" name="condition" [value]="condition" [(ngModel)]="selectedCondition" required>
         {{ condition }}
@@ -47,18 +53,19 @@
   </div>
 
   <div class="description">
-    <h3>Descrição do Produto</h3>
+    <h3><i class="fa fa-info"> </i> Descrição</h3>
     <textarea rows="4" placeholder="Descreva aqui" [(ngModel)]="productDescription"></textarea>
   </div>
 
   <div class="price-container">
-    <div class="price-label">Informe o Valor</div>
+    <div class="price-label"><i class="fa fa-money"> </i> Valor</div>
     <input
         type="text"
         class="price-input"
         placeholder="R$"
         [(ngModel)]="productPrice"
         (input)="formatPrice()"
+        style="width: 100%;"
     >
   </div>
 

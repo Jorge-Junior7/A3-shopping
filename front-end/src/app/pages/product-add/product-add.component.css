@@ -11,7 +11,7 @@
   width: 100%;
   max-width: 800px;
   padding: 40px;
-  margin: 40px auto;
+  margin: 220px auto auto auto;
   box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
@@ -123,6 +123,7 @@ h2 {
 }
 
 .description {
+  text-align: left;
   margin: 20px 0;
 }
 
@@ -141,8 +142,7 @@ h2 {
 }
 
 .price-container {
-  display: flex;
-  align-items: center;
+  text-align: left;
   justify-content: flex-start;
   margin-bottom: 20px;
   gap: 10px;
@@ -174,4 +174,29 @@ h2 {
 
 .submit-btn:hover {
   background-color: #088da5;
+}
+
+.container-top{
+  top: 60px;
+  display: block;
+  position: absolute;
+  width: 100%;
+  margin-left: -8px;
+  background: url(/assets/background.jpg);
+  height: 180px;
+  background-size: 100%;
+  font-family: sans-serif;
+
+  .texts{
+    margin-top: 20px;
+    position: absolute;
+    margin-left: 55px;
+    color: #FFF;
+
+    h5{
+      margin-top: -10px;
+      color: #9b9b9b;
+    }
+  }
+  
 }
