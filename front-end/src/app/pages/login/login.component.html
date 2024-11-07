@@ -1,32 +1,33 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <div class="login-box">
-  <h2>Login</h2>
-  <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+  <div class="login-header">
+    <img src="assets/logo.png" alt="Logo" class="logo">
+  </div>
+
+  <p *ngIf="errorMessage" class="error"><i class="fa fa-warning"> </i> {{ errorMessage }}</p> <!-- Mensagem de erro -->
+    
+  <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="form_login">
     <div class="user-box">
-      <label for="login-email">Email:</label>
+      <label for="login-email"><i class="fa fa-user"></i> Email:</label>
       <input formControlName="email" type="email" id="login-email" required [ngClass]="{'is-invalid': loginForm.get('email')?.invalid && loginForm.get('email')?.touched}" />
     </div>
 
     <div class="user-box">
-      <label for="login-password">Senha:</label>
+      <label for="login-password"><i class="fa fa-lock"></i> Senha:</label>
       <input formControlName="password" type="password" id="login-password" required [ngClass]="{'is-invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched}" />
     </div>
 
-    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p> <!-- Mensagem de erro -->
-
+    <p class="forgot-password">Esqueceu Senha?
+      <a routerLink="/reset-password" class="forgot-password">Alterar Senha</a>
+    </p>
+  
     <button type="submit" class="submit" [disabled]="isLoading">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
       Login
     </button>
 
     <div *ngIf="isLoading">Carregando...</div>
   </form>
-
-  <p>Esqueceu Senha?
-    <a routerLink="/reset-password" class="forgot-password">Alterar Senha</a>
-  </p>
 
   <p>Não tem uma conta?
     <a routerLink="/register" class="register">Criar Conta</a>

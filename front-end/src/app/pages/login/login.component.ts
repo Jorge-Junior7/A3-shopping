@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
         }
       });
     } else {
-      this.errorMessage = 'Por favor, pré-encha os campos corretamente.';
+      this.errorMessage = 'Por favor, preencha os campos corretamente.';
     }
   }
 

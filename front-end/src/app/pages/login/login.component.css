@@ -1,5 +1,27 @@
+.logo{
+  width: 200px;
+}
+
+.error{
+  background-color: #c33838;
+  padding: 10px;
+  border-radius: 5px;
+  color: #FFF !important;
+}
+
+.login-header{
+  margin: -20px;
+}
+
+.form_login{
+  background-color: #252525;
+  border-radius: 5px;
+  padding: 10px;
+}
+
 /* Caixa de login */
 .login-box {
+  font-family: sans-serif;
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -25,16 +47,14 @@
 
 /* Campos de entrada */
 .user-box {
-  display: flex;
+  text-align: left;
   flex-direction: column;
-  align-items: center;
   margin-bottom: 15px;
 }
 
 .user-box label {
   color: #0bb1cb;
   font-size: 16px;
-  width: 100%;
   text-align: left;
   padding-left: 5px;
 }
@@ -42,19 +62,27 @@
 /* Estilização dos campos de entrada */
 .user-box input[type="email"],
 .user-box input[type="password"] {
-  width: 90%;
+  margin-top: 5px;
+  width: calc(100% - 13px);
   height: 35px;
-  padding: 5px;
   font-size: 16px;
   color: #aaa;
+  padding: 0px 5px;
   background: transparent;
-  border: 1px solid #fff;
+  border: 1px solid #060606;
   outline: none;
   border-radius: 5px;
 }
 
+.forgot-password{
+  font-size: 11px !important;
+  text-align: left;
+  margin: -10px 5px 0px 0px;
+}
+
 /* Botão de Envio */
 .submit {
+  border-radius: 5px;
   position: relative;
   display: inline-block;
   padding: 12px 50px;
