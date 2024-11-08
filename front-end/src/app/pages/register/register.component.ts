@@ -1,14 +1,13 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RegisterService } from '../../services/api/register.service';
 import { CommonModule, NgIf } from '@angular/common';
-import { FinalRegistrationComponent } from '../final-registration/final-registration.component';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [RouterLink, RouterOutlet, CommonModule, ReactiveFormsModule, NgIf, FinalRegistrationComponent],
+  imports: [RouterLink, RouterOutlet, CommonModule, ReactiveFormsModule, NgIf],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
   encapsulation: ViewEncapsulation.None,
@@ -19,19 +18,24 @@ export class RegisterComponent {
   errorMessage: string | null = null;
   selectedFile: File | null = null;
 
-  constructor(private fb: FormBuilder, private registerService: RegisterService) {
+  constructor(
+    private fb: FormBuilder,
+    private registerService: RegisterService,
+    private router: Router
+  ) {
     this.registerForm = this.fb.group({
       full_name: ['', Validators.required],
       birthdate: ['', Validators.required],
-      cpf: ['', Validators.required],
-      nickname: [''],
-      location: [''],
+      cpf: ['', [Validators.required, Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/)]],
+      nickname: ['', Validators.required],
+      location: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [
         Validators.required,
         Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/)
       ]]
     });
+
   }
 
   onFileSelected(event: Event): void {
@@ -49,7 +53,7 @@ export class RegisterComponent {
   }
 
   submitForm(): void {
-    console.log('Dados do formulário:', this.registerForm.value);
+    this.errorMessage = null;
 
     if (this.registerForm.valid) {
       const formData = new FormData();
@@ -61,11 +65,10 @@ export class RegisterComponent {
         formData.append('profilePhoto', this.selectedFile);
       }
 
-      console.log('Dados a serem enviados:', formData);
-
       this.registerService.register(formData).subscribe({
         next: (response) => {
-          console.log('Usuário registrado com sucesso!', response);
+          const recoveryPhrase = response.recovery_phrase;  // Captura a frase de recuperação da resposta
+          this.router.navigate(['/final-registration'], { queryParams: { recoveryPhrase } });  // Redireciona com a frase de recuperação
         },
         error: (error) => {
           this.errorMessage = error.error.errors ? Object.values(error.error.errors).join(', ') : 'Erro ao registrar';
@@ -73,22 +76,7 @@ export class RegisterComponent {
         }
       });
     } else {
-      console.error('Formulário inválido:', this.registerForm.errors);
       this.errorMessage = 'Preencha todos os campos obrigatórios corretamente.';
-
-      for (const control in this.registerForm.controls) {
-        if (this.registerForm.controls[control].invalid) {
-          const errors = this.registerForm.controls[control].errors;
-          console.log(`Campo ${control} inválido:`, errors);
-
-          if (errors?.['required']) {
-            this.errorMessage += ` ${control} é obrigatório.`;
-          }
-          if (errors?.['pattern'] && control === 'password') {
-            this.errorMessage += ` A senha deve ter pelo menos 8 caracteres, uma letra maiúscula, uma letra minúscula, um número e um caractere especial.`;
-          }
-        }
-      }
     }
   }
 }

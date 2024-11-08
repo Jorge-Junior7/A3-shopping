@@ -1,1 +1,65 @@
-<p>login-reset works!</p>
+<div class="reset-box">
+  <h2>Recuperação de Conta</h2>
+
+  <form *ngIf="!isVerified" [formGroup]="resetForm" (ngSubmit)="verifyData()">
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" formControlName="email" id="email" placeholder="exemplo@gmail.com">
+      <div *ngIf="resetForm.get('email')?.invalid && resetForm.get('email')?.touched" class="error-message">
+        <p *ngIf="resetForm.get('email')?.errors?.['required']">Email é obrigatório.</p>
+        <p *ngIf="resetForm.get('email')?.errors?.['email']">Formato de email inválido.</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="cpf">CPF:</label>
+      <input type="text" formControlName="cpf" id="cpf" placeholder="000.000.000-00">
+      <div *ngIf="resetForm.get('cpf')?.invalid && resetForm.get('cpf')?.touched" class="error-message">
+        <p *ngIf="resetForm.get('cpf')?.errors?.['required']">CPF é obrigatório.</p>
+        <p *ngIf="resetForm.get('cpf')?.errors?.['pattern']">CPF inválido. Formato esperado: 000.000.000-00.</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="birthdate">Data de Nascimento:</label>
+      <input type="date" formControlName="birthdate" id="birthdate">
+      <div *ngIf="resetForm.get('birthdate')?.invalid && resetForm.get('birthdate')?.touched" class="error-message">
+        <p *ngIf="resetForm.get('birthdate')?.errors?.['required']">Data de nascimento é obrigatória.</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="recoveryPhrase">Frase de Recuperação:</label>
+      <input type="text" formControlName="recoveryPhrase" id="recoveryPhrase" placeholder="Digite sua frase de recuperação">
+      <div *ngIf="resetForm.get('recoveryPhrase')?.invalid && resetForm.get('recoveryPhrase')?.touched" class="error-message">
+        <p *ngIf="resetForm.get('recoveryPhrase')?.errors?.['required']">Frase de recuperação é obrigatória.</p>
+      </div>
+    </div>
+
+    <button type="submit" class="submit">Próximo</button>
+    <div *ngIf="errorMessage" class="error-messages">{{ errorMessage }}</div>
+  </form>
+
+  <!-- Formulário para redefinir a senha, exibido após a confirmação -->
+  <form *ngIf="isVerified" [formGroup]="changePasswordForm" (ngSubmit)="updatePassword()">
+    <div class="form-group">
+      <label for="newPassword">Nova Senha:</label>
+      <input type="password" formControlName="newPassword" id="newPassword" placeholder="Mínimo 8 caracteres">
+      <div *ngIf="changePasswordForm.get('newPassword')?.invalid && changePasswordForm.get('newPassword')?.touched" class="error-message">
+        <p *ngIf="changePasswordForm.get('newPassword')?.errors?.['required']">Senha é obrigatória.</p>
+        <p *ngIf="changePasswordForm.get('newPassword')?.errors?.['pattern']">A senha deve ter pelo menos 8 caracteres, uma letra maiúscula, uma letra minúscula, um número e um caractere especial.</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="confirmPassword">Confirmar Senha:</label>
+      <input type="password" formControlName="confirmPassword" id="confirmPassword" placeholder="Confirme sua senha">
+      <div *ngIf="changePasswordForm.errors?.['mismatch'] && changePasswordForm.get('confirmPassword')?.touched" class="error-message">
+        <p>As senhas não correspondem.</p>
+      </div>
+    </div>
+
+    <button type="submit" class="submit">Alterar Senha</button>
+    <div *ngIf="errorMessage" class="error-messages">{{ errorMessage }}</div>
+  </form>
+</div>

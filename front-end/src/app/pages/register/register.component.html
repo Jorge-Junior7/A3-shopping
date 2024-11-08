@@ -14,45 +14,70 @@
       <div class="column">
         <div class="user-box-inline">
           <label for="login-email">Email:</label>
-          <input required formControlName="email" id="login-email" placeholder="exemplo@gmail.com" aria-describedby="emailHelp">
+          <input required formControlName="email" id="login-email" placeholder="exemplo@gmail.com">
+          <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="error-message">
+            <p *ngIf="registerForm.get('email')?.errors?.['required']">Email é obrigatório.</p>
+            <p *ngIf="registerForm.get('email')?.errors?.['email']">Formato de email inválido.</p>
+          </div>
         </div>
+
         <div class="user-box-inline">
           <label for="login-password">Senha:</label>
-          <input required type="password" formControlName="password" id="login-password" placeholder="Mínimo 8 caracteres" aria-describedby="passwordHelp">
+          <input required type="password" formControlName="password" id="login-password" placeholder="Mínimo 8 caracteres">
+          <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="error-message">
+            <p *ngIf="registerForm.get('password')?.errors?.['required']">Senha é obrigatória.</p>
+            <p *ngIf="registerForm.get('password')?.errors?.['pattern']">A senha deve ter pelo menos 8 caracteres, uma letra maiúscula, uma letra minúscula, um número e um caractere especial.</p>
+          </div>
         </div>
       </div>
       <div class="column">
         <div class="user-box-inline">
           <label for="full_name">Nome Completo:</label>
           <input required formControlName="full_name" id="full_name" placeholder="Seu Nome Completo">
+          <div *ngIf="registerForm.get('full_name')?.invalid && registerForm.get('full_name')?.touched" class="error-message">
+            <p *ngIf="registerForm.get('full_name')?.errors?.['required']">Nome completo é obrigatório.</p>
+          </div>
         </div>
+
         <div class="user-box-inline">
           <label for="birthdate">Data de Nascimento:</label>
           <input required formControlName="birthdate" id="birthdate" type="date">
+          <div *ngIf="registerForm.get('birthdate')?.invalid && registerForm.get('birthdate')?.touched" class="error-message">
+            <p *ngIf="registerForm.get('birthdate')?.errors?.['required']">Data de nascimento é obrigatória.</p>
+          </div>
         </div>
-
       </div>
     </div>
     <div class="form-columns">
       <div class="column">
         <div class="user-box-inline">
           <label for="cpf">CPF:</label>
-          <input required formControlName="cpf" id="cpf" placeholder="000.000.000-00" aria-describedby="cpfHelp">
+          <input required formControlName="cpf" id="cpf" placeholder="000.000.000-00">
+          <div *ngIf="registerForm.get('cpf')?.invalid && registerForm.get('cpf')?.touched" class="error-message">
+            <p *ngIf="registerForm.get('cpf')?.errors?.['required']">CPF é obrigatório.</p>
+            <p *ngIf="registerForm.get('cpf')?.errors?.['pattern']">CPF inválido. Formato esperado: 000.000.000-00.</p>
+          </div>
         </div>
         <div class="user-box-inline">
           <label for="nickname">Apelido:</label>
-          <input required formControlName="nickname" id="nickname" placeholder="Seu Apelido" aria-describedby="nicknameHelp">
+          <input required formControlName="nickname" id="nickname" placeholder="Seu Apelido">
+          <div *ngIf="registerForm.get('nickname')?.invalid && registerForm.get('nickname')?.touched" class="error-message">
+            <p *ngIf="registerForm.get('nickname')?.errors?.['required']">Apelido é obrigatório.</p>
+          </div>
         </div>
       </div>
       <div class="column">
         <div class="user-box-inline">
           <label for="location">Localização:</label>
-          <input required formControlName="location" id="location" placeholder="Sua Localização" aria-describedby="locationHelp">
+          <input required formControlName="location" id="location" placeholder="Sua Localização">
+          <div *ngIf="registerForm.get('location')?.invalid && registerForm.get('location')?.touched" class="error-message">
+            <p *ngIf="registerForm.get('location')?.errors?.['required']">Localização é obrigatória.</p>
+          </div>
         </div>
       </div>
     </div>
     <div class="form-buttons">
-      <a routerLink="/final-registration"><button type="submit" class="submit">Cadastrar</button></a>
+      <button type="submit" class="submit">Cadastrar</button>
     </div>
     <div *ngIf="errorMessage" class="error-messages">{{ errorMessage }}</div>
   </form>
