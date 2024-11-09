@@ -1,7 +1,8 @@
 <div class="reset-box">
   <h2>Recuperação de Conta</h2>
 
-  <form *ngIf="!isVerified" [formGroup]="resetForm" (ngSubmit)="verifyData()">
+  <!-- Formulário de verificação inicial -->
+  <form *ngIf="!isVerified && !passwordUpdated" [formGroup]="resetForm" (ngSubmit)="verifyData()">
     <div class="form-group">
       <label for="email">Email:</label>
       <input type="email" formControlName="email" id="email" placeholder="exemplo@gmail.com">
@@ -41,7 +42,7 @@
   </form>
 
   <!-- Formulário para redefinir a senha, exibido após a confirmação -->
-  <form *ngIf="isVerified" [formGroup]="changePasswordForm" (ngSubmit)="updatePassword()">
+  <form *ngIf="isVerified && !passwordUpdated" [formGroup]="changePasswordForm" (ngSubmit)="updatePassword()">
     <div class="form-group">
       <label for="newPassword">Nova Senha:</label>
       <input type="password" formControlName="newPassword" id="newPassword" placeholder="Mínimo 8 caracteres">
@@ -62,4 +63,10 @@
     <button type="submit" class="submit">Alterar Senha</button>
     <div *ngIf="errorMessage" class="error-messages">{{ errorMessage }}</div>
   </form>
+
+  <!-- Mensagem "Fazer Login" após a atualização bem-sucedida da senha -->
+  <div *ngIf="passwordUpdated" class="login-message">
+    <h2>Senha alterada com sucesso!</h2>
+    <a routerLink="/" class="login-button"><button>Fazer Login</button></a>
+  </div>
 </div>

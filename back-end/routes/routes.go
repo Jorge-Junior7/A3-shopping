@@ -29,6 +29,9 @@ func SetupRoutes() *gin.Engine {
 	router.POST("/products", handlers.AddProduct)
 	router.GET("/products", handlers.GetProducts)
 	
+    router.POST("/register/verify", handlers.VerifyUserData)
+    router.POST("/register/update-password", handlers.UpdateUserPassword)
+
 
     return router
 }
