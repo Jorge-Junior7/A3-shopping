@@ -13,11 +13,11 @@ body{
 }
 .clearfix:after, .clearfix:before {
   content: '';
-  display: table 
+  display: table
 }
 .clearfix:after {
   clear: both;
-  display: block 
+  display: block
 }
 ul{
   list-style:none;
@@ -137,7 +137,7 @@ h4.row.mega-title {
 .flyout-mega ul > li > a:hover, .flyout-mega ul > li > a:active, .flyout-mega ul > li > a:focus{
   text-decoration: none;
   background-color: transparent !important;
-  color: #ccc !important 
+  color: #ccc !important
 }
 /*mega menu*/
 .mega-menu {
@@ -157,7 +157,7 @@ h4.row.mega-title {
   text-transform: uppercase;
   border-bottom: 1px solid #547787;
   padding-top: 15px;
-  background-color: #365670 
+  background-color: #365670
 }
 .mega-menu ul li a {
   line-height: 25px;
