@@ -1,4 +1,4 @@
-.container-top{
+.container-top {
   top: 60px;
   display: block;
   position: absolute;
@@ -8,19 +8,18 @@
   height: 180px;
   background-size: 100%;
   font-family: sans-serif;
+}
 
-  .texts{
-    margin-top: 20px;
-    position: absolute;
-    margin-left: 55px;
-    color: #FFF;
+.texts {
+  margin-top: 20px;
+  position: absolute;
+  margin-left: 55px;
+  color: #fff;
+}
 
-    h5{
-      margin-top: -10px;
-      color: #9b9b9b;
-    }
-  }
-  
+.texts h5 {
+  margin-top: -10px;
+  color: #9b9b9b;
 }
 
 .container {
@@ -31,7 +30,6 @@
   text-align: center;
 }
 
-/* Barra de busca centralizada */
 .search-bar {
   display: flex;
   justify-content: center;
@@ -61,34 +59,25 @@
   background-color: #009bb1;
 }
 
-/* Lista de produtos com espaçamento em cima e embaixo */
 .product-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between; /* Para garantir que os produtos ocupem o espaço disponível */
-  margin: 30px 0; /* Espaçamento simétrico acima e abaixo */
+  justify-content: space-between;
+  margin: 30px 0;
 }
 
-/* Ajuste a largura dos itens para garantir que cabem 4 por linha */
 .product {
   background-color: white;
   border: 1px solid #d1d1d1;
   border-radius: 5px;
-  width: calc(23% - 15px); /* Ajuste para garantir que 4 produtos caibam na linha */
+  width: calc(23% - 15px);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   text-align: center;
-  margin-bottom: 20px; /* Espaçamento entre as linhas */
+  margin-bottom: 20px;
 }
 
-.product-body{
+.product-body {
   padding: 5px;
-}
-
-.product-footer{
-  margin-top: 15px;
-  padding: 2px;
-  background-color: #e3e3e3;
-  border-top: 1px solid #d1d1d1;
 }
 
 .product img {
@@ -98,30 +87,9 @@
   border: 1px solid #d1d1d1;
 }
 
-.product h2 {
+.product h4 {
   font-size: 1.2em;
   margin: 10px 0;
-}
-
-.product p {
-  margin: 5px 0;
-}
-
-/* Responsividade para telas menores */
-@media (max-width: 768px) {
-  .product {
-    width: calc(48% - 10px); /* 2 produtos por linha */
-  }
-}
-
-@media (max-width: 480px) {
-  .product {
-    width: 100%; /* 1 produto por linha */
-  }
-
-  .search-bar input[type="text"] {
-    width: 200px;
-  }
 }
 
 .label-success {
@@ -132,6 +100,19 @@
   color: #ffffff;
 }
 
-.location{
+/* Responsividade */
+@media (max-width: 768px) {
+  .product {
+    width: calc(48% - 10px);
+  }
 }
 
+@media (max-width: 480px) {
+  .product {
+    width: 100%;
+  }
+
+  .search-bar input[type="text"] {
+    width: 200px;
+  }
+}

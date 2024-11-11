@@ -1,34 +1,35 @@
-
 <div class="container-top">
   <div class="texts">
     <h2><i class="fa fa-list-alt" aria-hidden="true"></i> Encontre seu Produto</h2>
-    <h5>Aqui se encontra uma lista dos produtos cadastrados, você pode realizar o filtro pelo nome do produto.</h5>
+    <h5>Aqui se encontra uma lista dos produtos cadastrados. Você pode realizar o filtro pelo nome do produto.</h5>
   </div>
 
-  <!-- Campo de busca e botão de pesquisa -->
   <div class="search-bar">
-    <input type="text" placeholder="Pesquisar produtos..." />
+    <input type="text" class="search-input" placeholder="Pesquisar produtos..." />
     <button class="search-button">Pesquisar</button>
   </div>
 </div>
 
 <div class="container container-items">
-  <!-- Lista de produtos com espaçamento simétrico -->
   <div class="product-list">
-    <div *ngFor="let product of products" class="product">
+    <div *ngFor="let product of paginatedProducts" class="product">
       <div class="product-body">
-        <!--<img [src]="product.imageUrl" alt="{{product.name}}">-->
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Volkswagen_Gol_Highline_2023_%2853708009248%29_%28cropped%29.jpg/1200px-Volkswagen_Gol_Highline_2023_%2853708009248%29_%28cropped%29.jpg" alt="{{product.name}}">
-        <h4>{{product.name}}</h4>
-        <span class="label-success">
-          <i class="fa fa-money"></i> {{product.price}}
+        <div class="product-image-container">
+          <img class="product-image" [src]="product.photo1" alt="{{ product.title }}">
+        </div>
+        <h4 class="product-title">{{ product.title }}</h4>
+        <span class="product-price">{{ product.price | currency:'BRL' }}</span>
+        <span class="product-date">
+          <i class="fa fa-calendar"></i> {{ product.publish_date | date:'dd/MM/yyyy' }}
         </span>
       </div>
-      <div class="product-footer">
-        <p class="location">
-          <i class="fa fa-map-marker"></i> {{product.location}}
-        </p>
-      </div>
     </div>
+  </div>
+
+  <!-- Botões de navegação -->
+  <div class="pagination-controls">
+    <button (click)="previousPage()" [disabled]="currentPage === 1">Anterior</button>
+    <span>Página {{ currentPage }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage * productsPerPage >= products.length">Próximo</button>
   </div>
 </div>

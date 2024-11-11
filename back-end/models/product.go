@@ -8,7 +8,7 @@ type Product struct {
     Description string         `json:"description"`
     Price       float64        `json:"price"`
     Category    string         `json:"category"`
-    Condition   string         `json:"condition"`
+    Condition   sql.NullString `json:"condition"`  // Alterado para sql.NullString
     UserID      int            `json:"user_id"`
     Photo1      sql.NullString `json:"photo1"`
     Photo2      sql.NullString `json:"photo2"`

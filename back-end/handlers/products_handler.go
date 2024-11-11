@@ -30,6 +30,7 @@ func isValid(value string, validValues []string) bool {
 }
 
 // Função para salvar uma imagem e retornar o nome do arquivo
+// Função para salvar uma imagem e retornar o nome do arquivo
 func UploadImages(c *gin.Context, fileKey string) (string, error) {
     file, err := c.FormFile(fileKey)
     if err != nil {
@@ -38,10 +39,11 @@ func UploadImages(c *gin.Context, fileKey string) (string, error) {
     }
 
     fileName := fmt.Sprintf("%d_%s", time.Now().UnixNano(), file.Filename)
-    filePath := filepath.Join("uploads_products", fileName)
+    filePath := filepath.Join("handlers", "uploads_products", fileName) // Caminho ajustado para handlers/uploads_products
 
-    if _, err := os.Stat("uploads_products"); os.IsNotExist(err) {
-        if mkErr := os.MkdirAll("uploads_products", os.ModePerm); mkErr != nil {
+    // Cria o diretório, se não existir
+    if _, err := os.Stat(filepath.Join("handlers", "uploads_products")); os.IsNotExist(err) {
+        if mkErr := os.MkdirAll(filepath.Join("handlers", "uploads_products"), os.ModePerm); mkErr != nil {
             return "", fmt.Errorf("erro ao criar o diretório: %w", mkErr)
         }
     }
@@ -53,6 +55,7 @@ func UploadImages(c *gin.Context, fileKey string) (string, error) {
 
     return fileName, nil
 }
+
 
 func AddProduct(c *gin.Context) {
     fmt.Println("Iniciando AddProduct...")
