@@ -1,27 +1,23 @@
 .logo{
     width: 200px;
-  }
-  
-  .error-message{
+}
+.error-message{
     background-color: #c33838;
     margin-top: 5px;
     padding: 5px 10px 5px 10px;
     border-radius: 5px;
     color: #FFF !important;
-  }
-  
-  .reset-header{
+}
+.reset-header{
     margin: -20px;
-  }
-  
-  .resetForm{
+}
+.resetForm{
     background-color: #252525;
     border-radius: 5px;
     padding: 10px;
-  }
-  
-  /* Caixa de login */
-  .reset-box {
+}
+/* Caixa de login */
+.reset-box {
     font-family: sans-serif;
     display: flex;
     flex-direction: column;
@@ -36,32 +32,28 @@
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
     border-radius: 10px;
     text-align: center;
-  }
-  
-  /* Título da caixa */
-  .reset-box h2 {
+}
+/* Título da caixa */
+.reset-box h2 {
     margin: 0 0 20px;
     color: #0bb1cb;
     font-size: 2rem;
     font-weight: bold;
-  }
-  
-  /* Campos de entrada */
-  .form-group {
+}
+/* Campos de entrada */
+.form-group {
     text-align: left;
     flex-direction: column;
     margin-bottom: 15px;
-  }
-  
-  .form-group label {
+}
+.form-group label {
     color: #0bb1cb;
     font-size: 16px;
     text-align: left;
     padding-left: 5px;
-  }
-  
-  /* Estilização dos campos de entrada */
-  .form-group input {
+}
+/* Estilização dos campos de entrada */
+.form-group input {
     margin-top: 5px;
     width: calc(100% - 13px);
     height: 35px;
@@ -72,16 +64,14 @@
     border: 1px solid #060606;
     outline: none;
     border-radius: 5px;
-  }
-  
-  .forgot-password{
+}
+.forgot-password{
     font-size: 11px !important;
     text-align: left;
     margin: -10px 5px 0px 0px;
-  }
-  
-  /* Botão de Envio */
-  .submit {
+}
+/* Botão de Envio */
+.submit {
     border-radius: 5px;
     position: relative;
     display: inline-block;
@@ -97,15 +87,12 @@
     transition: color 0.4s;
     background-color: transparent;
     cursor: pointer;
-  }
-  
-  .submit:hover {
+}
+.submit:hover {
     color: #fff;
-  }
-  
-  /* Efeitos de animação do botão */
-  .submit::before,
-  .submit::after {
+}
+/* Efeitos de animação do botão */
+.submit::before, .submit::after {
     content: '';
     position: absolute;
     width: 100%;
@@ -113,37 +100,28 @@
     background: linear-gradient(45deg, transparent, #0bb1cb, transparent);
     transition: transform 0.5s;
     transform: translateX(-100%) rotate(45deg);
-  }
-  
-  .submit::before {
+}
+.submit::before {
     top: -2px;
     left: -2px;
-  }
-  
-  .submit::after {
+}
+.submit::after {
     bottom: -2px;
     right: -2px;
-  }
-  
-  .submit:hover::before {
+}
+.submit:hover::before {
     transform: translateX(100%) rotate(45deg);
-  }
-  
-  .submit:hover::after {
+}
+.submit:hover::after {
     transform: translateX(-100%) rotate(45deg);
-  }
-  
-  /* Estilo dos links */
-  .reset-box p,
-  .reset-box p:last-child {
+}
+/* Estilo dos links */
+.reset-box p, .reset-box p:last-child {
     color: #aaa;
     font-size: 16px;
-  }
-  
-  .forgot-password,
-  .register {
+}
+.forgot-password, .register {
     color: #0bb1cb;
     text-decoration: none;
     font-weight: bold;
-  }
-  
+}

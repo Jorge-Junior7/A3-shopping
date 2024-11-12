@@ -1,8 +1,7 @@
 body{
     font-family: sans-serif !important;
-  }
-  
-  .container-top {
+}
+.container-top {
     top: 60px;
     display: block;
     position: absolute;
@@ -12,29 +11,25 @@ body{
     height: 180px;
     background-size: 100%;
     font-family: sans-serif;
-  }
-  
-  .texts {
+}
+.texts {
     margin-top: 20px;
     position: absolute;
     margin-left: 55px;
     color: #fff;
-  }
-  
-  .texts h5 {
+}
+.texts h5 {
     margin-top: -10px;
     color: #9b9b9b;
-  }
-  
-  .container {
+}
+.container {
     max-width: 1200px;
     margin: 0 auto;
     margin-top: 220px;
     padding: 20px;
     text-align: center;
-  }
-  
-  .button-blue {
+}
+.button-blue {
     margin: 10px;
     font-size: 12px;
     display: inline-block;
@@ -50,20 +45,16 @@ body{
     height: 2.6em;
     text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
     transition: box-shadow 0.15s ease, transform 0.15s ease;
-  }
-  
-  .button-blue:hover {
+}
+.button-blue:hover {
     box-shadow: 0px 0.1em 0.2em rgb(45 35 66 / 40%), 0px 0.4em 0.7em -0.1em rgb(45 35 66 / 30%), inset 0px -0.1em 0px #3c4fe0;
     transform: translateY(-0.1em);
-  }
-  
-  .button-blue:active {
+}
+.button-blue:active {
     box-shadow: inset 0px 0.1em 0.6em #0067c3;
     transform: translateY(0em);
-  }
-
-  
-  .button-silver {
+}
+.button-silver {
     margin: 10px;
     font-size: 12px;
     display: inline-block;
@@ -79,19 +70,16 @@ body{
     height: 2.6em;
     text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
     transition: box-shadow 0.15s ease, transform 0.15s ease;
-  }
-  
-  .button-silver:hover {
+}
+.button-silver:hover {
     box-shadow: 0px 0.1em 0.2em rgb(45 35 66 / 40%), 0px 0.4em 0.7em -0.1em rgb(45 35 66 / 30%), inset 0px -0.1em 0px #1b1b1b;
     transform: translateY(-0.1em);
-  }
-  
-  .button-silver:active {
+}
+.button-silver:active {
     box-shadow: inset 0px 0.1em 0.6em #000;
     transform: translateY(0em);
-  }
-  
-  .button-red {
+}
+.button-red {
     margin: 10px;
     font-size: 12px;
     display: inline-block;
@@ -107,14 +95,12 @@ body{
     height: 2.6em;
     text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
     transition: box-shadow 0.15s ease, transform 0.15s ease;
-  }
-  
-  .button-red:hover {
+}
+.button-red:hover {
     box-shadow: 0px 0.1em 0.2em rgb(45 35 66 / 40%), 0px 0.4em 0.7em -0.1em rgb(45 35 66 / 30%), inset 0px -0.1em 0px #3d2222;
     transform: translateY(-0.1em);
-  }
-  
-  .button-red:active {
+}
+.button-red:active {
     box-shadow: inset 0px 0.1em 0.6em #ffb5c1;
     transform: translateY(0em);
-  }
+}

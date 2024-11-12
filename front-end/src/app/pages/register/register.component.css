@@ -14,64 +14,55 @@
   border-radius: 10px;
   text-align: center;
 }
-
-  /* Campos de entrada */
-  .form-group {
-    text-align: left;
-    flex-direction: column;
-    margin-bottom: 15px;
-  }
-  
-  .form-group label {
-    color: #0bb1cb;
-    font-size: 16px;
-    text-align: left;
-    padding-left: 5px;
-  }
-  
-  /* Estilização dos campos de entrada */
-  .form-group input {
-    margin-top: 5px;
-    width: calc(100% - 13px);
-    height: 35px;
-    font-size: 16px;
-    color: #aaa;
-    padding: 0px 5px;
-    background: transparent;
-    border: 1px solid #060606;
-    outline: none;
-    border-radius: 5px;
-  }
-  
+/* Campos de entrada */
+.form-group {
+  text-align: left;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+.form-group label {
+  color: #0bb1cb;
+  font-size: 16px;
+  text-align: left;
+  padding-left: 5px;
+}
+/* Estilização dos campos de entrada */
+.form-group input {
+  margin-top: 5px;
+  width: calc(100% - 13px);
+  height: 35px;
+  font-size: 16px;
+  color: #aaa;
+  padding: 0px 5px;
+  background: transparent;
+  border: 1px solid #060606;
+  outline: none;
+  border-radius: 5px;
+}
 .registerForm{
   background-color: #252525;
   border-radius: 5px;
   padding: 10px;
 }
-
 .login-box h2 {
   margin: 0 0 30px;
   color: #0bb1cb;
   font-size: 2rem;
   font-weight: bold;
 }
-
 .form-columns {
   display: flex;
   justify-content: space-between;
   gap: 20px;
 }
-
 .column {
   flex: 1;
 }
-
 .user-box-inline {
   display: flex;
   align-items: center;
   margin-bottom: 15px;
 }
-
 .user-box-inline label {
   color: #0bb1cb;
   font-size: 16px;
@@ -79,7 +70,6 @@
   text-align: right;
   padding-right: 10px;
 }
-
 .user-box-inline input {
   width: 100%;
   height: 30px;
@@ -91,7 +81,6 @@
   outline: none;
   border-radius: 5px;
 }
-
 .submit {
   display: inline-block;
   padding: 12px 40px;
@@ -104,62 +93,62 @@
   background-color: transparent;
   cursor: pointer;
 }
-
 .submit:hover {
   color: #fff;
 }
-
 .login-box p:last-child {
   color: #aaa;
   font-size: 16px;
 }
-
 .login {
   color: #0bb1cb;
   text-decoration: none;
   font-weight: bold;
 }
-
 .login:hover {
   color: #aaa;
 }
-
 /* Seção de perfil centralizada */
 .profile-section {
   display: flex;
-  justify-content: center; /* Centraliza horizontalmente */
-  margin-bottom: 20px; /* Adiciona espaço abaixo da seção do perfil */
+  justify-content: center;
+ /* Centraliza horizontalmente */
+  margin-bottom: 20px;
+ /* Adiciona espaço abaixo da seção do perfil */
 }
-
 /* Moldura da Foto de Perfil */
 .profile-photo-frame {
-  width: 110px; /* Largura da moldura */
-  height: 110px; /* Altura da moldura */
+  width: 110px;
+ /* Largura da moldura */
+  height: 110px;
+ /* Altura da moldura */
   border: 2px solid #aaa;
   border-radius: 50%;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto; /* Centraliza horizontalmente */
-  position: relative; /* Para posicionar o texto centralizado */
+  margin: 0 auto;
+ /* Centraliza horizontalmente */
+  position: relative;
+ /* Para posicionar o texto centralizado */
 }
-
 .profile-photo-frame img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
-  display: none; /* Oculta a imagem inicialmente */
+  display: none;
+ /* Oculta a imagem inicialmente */
 }
-
 .profile-photo-frame .placeholder {
   color: #aaa;
   text-align: center;
-  position: absolute; /* Para centralizar sobre a imagem */
-  pointer-events: none; /* Evita que o texto interfira no clique */
+  position: absolute;
+ /* Para centralizar sobre a imagem */
+  pointer-events: none;
+ /* Evita que o texto interfira no clique */
 }
-
 .error-message{
   background-color: #c33838;
   margin-top: 5px;

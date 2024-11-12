@@ -1,24 +1,20 @@
 .logo{
   width: 200px;
 }
-
 .error{
   background-color: #c33838;
   padding: 10px;
   border-radius: 5px;
   color: #FFF !important;
 }
-
 .login-header{
   margin: -20px;
 }
-
 .form_login{
   background-color: #252525;
   border-radius: 5px;
   padding: 10px;
 }
-
 /* Caixa de login */
 .login-box {
   font-family: sans-serif;
@@ -36,7 +32,6 @@
   border-radius: 10px;
   text-align: center;
 }
-
 /* Título da caixa */
 .login-box h2 {
   margin: 0 0 20px;
@@ -44,24 +39,20 @@
   font-size: 2rem;
   font-weight: bold;
 }
-
 /* Campos de entrada */
 .user-box {
   text-align: left;
   flex-direction: column;
   margin-bottom: 15px;
 }
-
 .user-box label {
   color: #0bb1cb;
   font-size: 16px;
   text-align: left;
   padding-left: 5px;
 }
-
 /* Estilização dos campos de entrada */
-.user-box input[type="email"],
-.user-box input[type="password"] {
+.user-box input[type="email"], .user-box input[type="password"] {
   margin-top: 5px;
   width: calc(100% - 13px);
   height: 35px;
@@ -73,13 +64,11 @@
   outline: none;
   border-radius: 5px;
 }
-
 .forgot-password{
   font-size: 11px !important;
   text-align: left;
   margin: -10px 5px 0px 0px;
 }
-
 /* Botão de Envio */
 .submit {
   border-radius: 5px;
@@ -98,14 +87,11 @@
   background-color: transparent;
   cursor: pointer;
 }
-
 .submit:hover {
   color: #fff;
 }
-
 /* Efeitos de animação do botão */
-.submit::before,
-.submit::after {
+.submit::before, .submit::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -114,34 +100,26 @@
   transition: transform 0.5s;
   transform: translateX(-100%) rotate(45deg);
 }
-
 .submit::before {
   top: -2px;
   left: -2px;
 }
-
 .submit::after {
   bottom: -2px;
   right: -2px;
 }
-
 .submit:hover::before {
   transform: translateX(100%) rotate(45deg);
 }
-
 .submit:hover::after {
   transform: translateX(-100%) rotate(45deg);
 }
-
 /* Estilo dos links */
-.login-box p,
-.login-box p:last-child {
+.login-box p, .login-box p:last-child {
   color: #aaa;
   font-size: 16px;
 }
-
-.forgot-password,
-.register {
+.forgot-password, .register {
   color: #0bb1cb;
   text-decoration: none;
   font-weight: bold;
