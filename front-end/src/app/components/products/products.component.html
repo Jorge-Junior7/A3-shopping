@@ -24,7 +24,9 @@
           <img class="product-image" [src]="product.photo1" alt="{{ product.title }}">
         </div>
         <h4 class="product-title">{{ product.title }}</h4>
-        <span class="product-price">{{ product.price | currency:'BRL' }}</span>
+        <span class="product-price label-success">{{ product.price | currency:'BRL' }}</span>
+      </div>
+      <div class="product-footer">
         <span class="product-date">
           <i class="fa fa-calendar"></i> {{ product.publish_date | date:'dd/MM/yyyy' }}
         </span>
@@ -34,8 +36,8 @@
 
   <!-- Botões de navegação -->
   <div class="pagination-controls">
-    <button (click)="previousPage()" [disabled]="currentPage === 1">Anterior</button>
+    <button class="button-blue" (click)="previousPage()" [disabled]="currentPage === 1">Anterior</button>
     <span>Página {{ currentPage }}</span>
-    <button (click)="nextPage()" [disabled]="currentPage * productsPerPage >= getFilteredProducts().length">Próximo</button>
+    <button class="button-blue" (click)="nextPage()" [disabled]="currentPage * productsPerPage >= getFilteredProducts().length">Próximo</button>
   </div>
 </div>

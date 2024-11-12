@@ -1,3 +1,7 @@
+body{
+  font-family: sans-serif !important;
+}
+
 .container-top {
   top: 60px;
   display: block;
@@ -30,6 +34,13 @@
   text-align: center;
 }
 
+.product-footer{
+  margin-top: 15px;
+  padding: 5px;
+  background-color: #e3e3e3;
+  border-top: 1px solid #d1d1d1;
+}
+
 .search-bar {
   display: flex;
   justify-content: center;
@@ -41,7 +52,7 @@
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ddd;
-  border-radius: 5px 0 0 5px;
+  border-radius: 5px;
   width: 300px;
 }
 
@@ -114,5 +125,40 @@
 
   .search-bar input[type="text"] {
     width: 200px;
+  }
+}
+
+
+
+.button-blue {
+  font-size: 12px;
+  display: inline-block;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  will-change: box-shadow,transform;
+  background: radial-gradient(100% 100% at 100% 0%, #0ab1c8 0%, #1a4062 100%);
+  box-shadow: 0px 0.01em 0.01em rgb(45 35 66 / 40%), 0px 0.3em 0.7em -0.01em rgb(45 35 66 / 30%), inset 0px -0.01em 0px rgb(58 65 111 / 50%);
+  padding: 0 16px;
+  border-radius: 0.3em;
+  color: #fff;
+  height: 2.6em;
+  text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.button-blue:hover {
+  box-shadow: 0px 0.1em 0.2em rgb(45 35 66 / 40%), 0px 0.4em 0.7em -0.1em rgb(45 35 66 / 30%), inset 0px -0.1em 0px #3c4fe0;
+  transform: translateY(-0.1em);
+}
+
+.button-blue:active {
+  box-shadow: inset 0px 0.1em 0.6em #0067c3;
+  transform: translateY(0em);
+}
+
+.pagination-controls{
+  span{
+    margin: 10px
   }
 }
