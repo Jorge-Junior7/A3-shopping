@@ -1,7 +1,15 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <app-menu></app-menu>
 
-<p>ESPAÇO</p>
-<p>ESPAÇO</p>
-<h1>Profile</h1>
-<a routerLink="/minhas-informacoes"><button>Minhas Informações</button></a>
-<a routerLink="/"><button>Sair</button></a>
+<div class="container-top">
+    <div class="texts">
+        <h2><i class="fa fa-user-profile" aria-hidden="true"></i> Perfil</h2>
+        <h5>Você pode visualizar os seus dados ou sair da plataforma.</h5>
+    </div>
+</div>
+  
+<div class="container">
+    <a routerLink="/minhas-informacoes"><button class="button-silver" style="font-size: 15px;">Minhas Informações</button></a>
+    <a routerLink="/"><button class="button-red" style="font-size: 15px;">Sair</button></a>
+</div>
