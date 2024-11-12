@@ -1,39 +1,51 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <div class="reset-box">
+  <div class="login-header">
+    <img src="assets/logo.png" alt="Logo" class="logo">
+  </div>
   <h2>Recuperação de Conta</h2>
 
+  <div *ngIf="errorMessage" class="error-messages">{{ errorMessage }}</div>
+  <!-- Mensagem "Fazer Login" após a atualização bem-sucedida da senha -->
+  <div *ngIf="passwordUpdated" class="login-message">
+    <h2>Senha alterada com sucesso!</h2>
+    <a routerLink="/" class="login-button"><button>Fazer Login</button></a>
+  </div>
+
   <!-- Formulário de verificação inicial -->
-  <form *ngIf="!isVerified && !passwordUpdated" [formGroup]="resetForm" (ngSubmit)="verifyData()">
+  <form *ngIf="!isVerified && !passwordUpdated" [formGroup]="resetForm" class="resetForm" (ngSubmit)="verifyData()">
     <div class="form-group">
-      <label for="email">Email:</label>
+      <label for="email"><i class="fa fa-envelope"></i> Email:</label>
       <input type="email" formControlName="email" id="email" placeholder="exemplo@gmail.com">
       <div *ngIf="resetForm.get('email')?.invalid && resetForm.get('email')?.touched" class="error-message">
-        <p *ngIf="resetForm.get('email')?.errors?.['required']">Email é obrigatório.</p>
-        <p *ngIf="resetForm.get('email')?.errors?.['email']">Formato de email inválido.</p>
+        <label *ngIf="resetForm.get('email')?.errors?.['required']">Email é obrigatório.</label>
+        <label *ngIf="resetForm.get('email')?.errors?.['email']">Formato de email inválido.</label>
       </div>
     </div>
 
     <div class="form-group">
-      <label for="cpf">CPF:</label>
+      <label for="cpf"><i class="fa fa-id-card"></i> CPF:</label>
       <input type="text" formControlName="cpf" id="cpf" placeholder="000.000.000-00">
       <div *ngIf="resetForm.get('cpf')?.invalid && resetForm.get('cpf')?.touched" class="error-message">
-        <p *ngIf="resetForm.get('cpf')?.errors?.['required']">CPF é obrigatório.</p>
-        <p *ngIf="resetForm.get('cpf')?.errors?.['pattern']">CPF inválido. Formato esperado: 000.000.000-00.</p>
+        <label *ngIf="resetForm.get('cpf')?.errors?.['required']">CPF é obrigatório.</label>
+        <label *ngIf="resetForm.get('cpf')?.errors?.['pattern']">CPF inválido. Formato esperado: 000.000.000-00.</label>
       </div>
     </div>
 
     <div class="form-group">
-      <label for="birthdate">Data de Nascimento:</label>
+      <label for="birthdate"><i class="fa fa-calendar"></i> Data de Nascimento:</label>
       <input type="date" formControlName="birthdate" id="birthdate">
       <div *ngIf="resetForm.get('birthdate')?.invalid && resetForm.get('birthdate')?.touched" class="error-message">
-        <p *ngIf="resetForm.get('birthdate')?.errors?.['required']">Data de nascimento é obrigatória.</p>
+        <label *ngIf="resetForm.get('birthdate')?.errors?.['required']">Data de nascimento é obrigatória.</label>
       </div>
     </div>
 
     <div class="form-group">
-      <label for="recoveryPhrase">Frase de Recuperação:</label>
+      <label for="recoveryPhrase"><i class="fa fa-file-text-o"></i> Frase de Recuperação:</label>
       <input type="text" formControlName="recoveryPhrase" id="recoveryPhrase" placeholder="Digite sua frase de recuperação">
       <div *ngIf="resetForm.get('recoveryPhrase')?.invalid && resetForm.get('recoveryPhrase')?.touched" class="error-message">
-        <p *ngIf="resetForm.get('recoveryPhrase')?.errors?.['required']">Frase de recuperação é obrigatória.</p>
+        <label *ngIf="resetForm.get('recoveryPhrase')?.errors?.['required']">Frase de recuperação é obrigatória.</label>
       </div>
     </div>
 
@@ -42,31 +54,25 @@
   </form>
 
   <!-- Formulário para redefinir a senha, exibido após a confirmação -->
-  <form *ngIf="isVerified && !passwordUpdated" [formGroup]="changePasswordForm" (ngSubmit)="updatePassword()">
+  <form *ngIf="isVerified && !passwordUpdated" [formGroup]="changePasswordForm" class="resetForm" (ngSubmit)="updatePassword()">
     <div class="form-group">
-      <label for="newPassword">Nova Senha:</label>
+      <label for="newPassword"><i class="fa fa-lock"></i> Nova Senha:</label>
       <input type="password" formControlName="newPassword" id="newPassword" placeholder="Mínimo 8 caracteres">
       <div *ngIf="changePasswordForm.get('newPassword')?.invalid && changePasswordForm.get('newPassword')?.touched" class="error-message">
-        <p *ngIf="changePasswordForm.get('newPassword')?.errors?.['required']">Senha é obrigatória.</p>
-        <p *ngIf="changePasswordForm.get('newPassword')?.errors?.['pattern']">A senha deve ter pelo menos 8 caracteres, uma letra maiúscula, uma letra minúscula, um número e um caractere especial.</p>
+        <label *ngIf="changePasswordForm.get('newPassword')?.errors?.['required']">Senha é obrigatória.</label>
+        <label *ngIf="changePasswordForm.get('newPassword')?.errors?.['pattern']">A senha deve ter pelo menos 8 caracteres, uma letra maiúscula, uma letra minúscula, um número e um caractere especial.</label>
       </div>
     </div>
 
     <div class="form-group">
-      <label for="confirmPassword">Confirmar Senha:</label>
+      <label for="confirmPassword"><i class="fa fa-lock"></i> Confirmar Senha:</label>
       <input type="password" formControlName="confirmPassword" id="confirmPassword" placeholder="Confirme sua senha">
       <div *ngIf="changePasswordForm.errors?.['mismatch'] && changePasswordForm.get('confirmPassword')?.touched" class="error-message">
-        <p>As senhas não correspondem.</p>
+        <label>As senhas não correspondem.</label>
       </div>
     </div>
 
     <button type="submit" class="submit">Alterar Senha</button>
-    <div *ngIf="errorMessage" class="error-messages">{{ errorMessage }}</div>
   </form>
 
-  <!-- Mensagem "Fazer Login" após a atualização bem-sucedida da senha -->
-  <div *ngIf="passwordUpdated" class="login-message">
-    <h2>Senha alterada com sucesso!</h2>
-    <a routerLink="/" class="login-button"><button>Fazer Login</button></a>
-  </div>
 </div>
